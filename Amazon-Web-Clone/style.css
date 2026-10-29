@@ -8,30 +8,38 @@
    1. CSS RESET & DESIGN TOKENS
    -------------------------------------------------------------------------- */
 :root {
-  /* Brand Palette */
-  --amazon-nav-bg: #131921;
-  --amazon-nav-belt: #0f1111;
-  --amazon-subnav-bg: #232f3e;
+  /* Warm Espresso Bronze Palette (#211B1A → #E8D8CE ramp) */
+  --amazon-nav-bg: #211B1A;
+  --amazon-nav-belt: #211B1A;
+  --amazon-subnav-bg: #382A28;
   --amazon-yellow: #febd69;
   --amazon-yellow-hover: #f3a847;
   --amazon-orange: #f08804;
   --amazon-orange-hover: #d67400;
-  --amazon-link: #007185;
-  --amazon-link-hover: #c7511f;
-  --amazon-body-bg: #e3e6e6;
+  --amazon-link: #60433D;
+  --amazon-link-hover: #C1A094;
+  --amazon-body-bg: #eaeded;
   --amazon-card-bg: #ffffff;
   
   /* Text Colors */
-  --text-primary: #0f1111;
-  --text-secondary: #565959;
-  --text-white: #ffffff;
-  --text-muted: #cccccc;
+  --text-primary: #211B1A;
+  --text-secondary: #60433D;
+  --text-white: #E8D8CE;
+  --text-muted: #C1A094;
+
+  /* Palette 3 Tokens */
+  --palette-dark-1: #211B1A;
+  --palette-dark-2: #382A28;
+  --palette-dark-3: #60433D;
+  --palette-text-muted: #916B60;
+  --palette-text-secondary: #C1A094;
+  --palette-text-primary: #E8D8CE;
 
   /* Elevation & Shadows */
-  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.18);
-  --shadow-search-focus: 0 0 0 3px rgba(240, 136, 4, 0.35);
+  --shadow-sm: 0 1px 3px rgba(33, 27, 26, 0.08);
+  --shadow-md: 0 4px 12px rgba(33, 27, 26, 0.12);
+  --shadow-lg: 0 10px 24px rgba(33, 27, 26, 0.18);
+  --shadow-search-focus: 0 0 0 3px rgba(193, 160, 148, 0.45);
 
   /* Transitions */
   --transition-fast: 0.15s ease-in-out;
