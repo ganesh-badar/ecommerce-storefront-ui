@@ -5,40 +5,49 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. CSS RESET & DESIGN TOKENS
+   1. CSS RESET & DESIGN TOKENS (Interactive Multi-Palette Architecture)
    -------------------------------------------------------------------------- */
-:root {
-  /* Warm Espresso Bronze Palette (#211B1A → #E8D8CE ramp) */
+:root,
+[data-palette="3"] {
+  /* Palette 3 (Default): Warm Espresso Bronze Ramp (#211B1A → #E8D8CE) */
   --amazon-nav-bg: #211B1A;
-  --amazon-nav-belt: #211B1A;
+  --amazon-nav-belt: #181312;
   --amazon-subnav-bg: #382A28;
-  --amazon-yellow: #febd69;
-  --amazon-yellow-hover: #f3a847;
-  --amazon-orange: #f08804;
-  --amazon-orange-hover: #d67400;
-  --amazon-link: #60433D;
-  --amazon-link-hover: #C1A094;
-  --amazon-body-bg: #eaeded;
-  --amazon-card-bg: #ffffff;
+  --amazon-yellow: #C1A094;
+  --amazon-yellow-hover: #E8D8CE;
+  --amazon-orange: #C1A094;
+  --amazon-orange-hover: #E8D8CE;
+  --amazon-link: #C1A094;
+  --amazon-link-hover: #E8D8CE;
+  --amazon-body-bg: #211B1A;
+  --amazon-card-bg: #382A28;
   
   /* Text Colors */
-  --text-primary: #211B1A;
-  --text-secondary: #60433D;
+  --text-primary: #E8D8CE;
+  --text-secondary: #C1A094;
   --text-white: #E8D8CE;
   --text-muted: #C1A094;
 
-  /* Palette 3 Tokens */
-  --palette-dark-1: #211B1A;
-  --palette-dark-2: #382A28;
-  --palette-dark-3: #60433D;
-  --palette-text-muted: #916B60;
-  --palette-text-secondary: #C1A094;
-  --palette-text-primary: #E8D8CE;
+  /* Architectural Palette Tokens */
+  --border-subtle: #60433D;
+  --border-medium: #916B60;
+  --border-strong: #C1A094;
+  --action-solid: #C1A094;
+  --action-solid-hover: #E8D8CE;
+  --action-solid-text: #211B1A;
+
+  /* Palette 3 Ramps */
+  --palette-color-1: #211B1A;
+  --palette-color-2: #382A28;
+  --palette-color-3: #60433D;
+  --palette-color-4: #916B60;
+  --palette-color-5: #C1A094;
+  --palette-color-6: #E8D8CE;
 
   /* Elevation & Shadows */
-  --shadow-sm: 0 1px 3px rgba(33, 27, 26, 0.08);
-  --shadow-md: 0 4px 12px rgba(33, 27, 26, 0.12);
-  --shadow-lg: 0 10px 24px rgba(33, 27, 26, 0.18);
+  --shadow-sm: 0 1px 3px rgba(33, 27, 26, 0.4);
+  --shadow-md: 0 4px 12px rgba(33, 27, 26, 0.5);
+  --shadow-lg: 0 10px 24px rgba(33, 27, 26, 0.6);
   --shadow-search-focus: 0 0 0 3px rgba(193, 160, 148, 0.45);
 
   /* Transitions */
@@ -50,6 +59,84 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-full: 9999px;
+}
+
+/* Palette 1: Slate Steel Blue Ramp (#111522 → #DCE3EF) */
+[data-palette="1"] {
+  --amazon-nav-bg: #111522;
+  --amazon-nav-belt: #0b0e17;
+  --amazon-subnav-bg: #1E263B;
+  --amazon-yellow: #98A9C4;
+  --amazon-yellow-hover: #DCE3EF;
+  --amazon-orange: #98A9C4;
+  --amazon-orange-hover: #DCE3EF;
+  --amazon-link: #98A9C4;
+  --amazon-link-hover: #DCE3EF;
+  --amazon-body-bg: #111522;
+  --amazon-card-bg: #1E263B;
+  
+  --text-primary: #DCE3EF;
+  --text-secondary: #98A9C4;
+  --text-white: #DCE3EF;
+  --text-muted: #98A9C4;
+
+  --border-subtle: #303D59;
+  --border-medium: #536684;
+  --border-strong: #98A9C4;
+  --action-solid: #98A9C4;
+  --action-solid-hover: #DCE3EF;
+  --action-solid-text: #111522;
+
+  --palette-color-1: #111522;
+  --palette-color-2: #1E263B;
+  --palette-color-3: #303D59;
+  --palette-color-4: #536684;
+  --palette-color-5: #98A9C4;
+  --palette-color-6: #DCE3EF;
+
+  --shadow-sm: 0 1px 3px rgba(17, 21, 34, 0.4);
+  --shadow-md: 0 4px 12px rgba(17, 21, 34, 0.5);
+  --shadow-lg: 0 10px 24px rgba(17, 21, 34, 0.6);
+  --shadow-search-focus: 0 0 0 3px rgba(152, 169, 196, 0.45);
+}
+
+/* Palette 2: Obsidian Velvet Ramp (#17151C → #E2DDE7) */
+[data-palette="2"] {
+  --amazon-nav-bg: #17151C;
+  --amazon-nav-belt: #0f0d12;
+  --amazon-subnav-bg: #292531;
+  --amazon-yellow: #AAA2B3;
+  --amazon-yellow-hover: #E2DDE7;
+  --amazon-orange: #AAA2B3;
+  --amazon-orange-hover: #E2DDE7;
+  --amazon-link: #AAA2B3;
+  --amazon-link-hover: #E2DDE7;
+  --amazon-body-bg: #17151C;
+  --amazon-card-bg: #292531;
+  
+  --text-primary: #E2DDE7;
+  --text-secondary: #AAA2B3;
+  --text-white: #E2DDE7;
+  --text-muted: #AAA2B3;
+
+  --border-subtle: #45404F;
+  --border-medium: #716879;
+  --border-strong: #AAA2B3;
+  --action-solid: #AAA2B3;
+  --action-solid-hover: #E2DDE7;
+  --action-solid-text: #17151C;
+
+  --palette-color-1: #17151C;
+  --palette-color-2: #292531;
+  --palette-color-3: #45404F;
+  --palette-color-4: #716879;
+  --palette-color-5: #AAA2B3;
+  --palette-color-6: #E2DDE7;
+
+  --shadow-sm: 0 1px 3px rgba(23, 21, 28, 0.4);
+  --shadow-md: 0 4px 12px rgba(23, 21, 28, 0.5);
+  --shadow-lg: 0 10px 24px rgba(23, 21, 28, 0.6);
+  --shadow-search-focus: 0 0 0 3px rgba(170, 162, 179, 0.45);
 }
 
 *,
@@ -263,7 +350,7 @@ header {
   flex: 1;
   max-width: 800px;
   height: 40px;
-  background-color: var(--amazon-yellow);
+  background-color: var(--border-subtle);
   border-radius: var(--radius-sm);
   position: relative;
   transition: box-shadow var(--transition-fast);
@@ -274,8 +361,8 @@ header {
 }
 
 .search-select {
-  background-color: #f3f3f3;
-  color: #333333;
+  background-color: var(--border-subtle);
+  color: var(--text-primary);
   width: auto;
   min-width: 52px;
   padding: 0 8px;
@@ -283,7 +370,7 @@ header {
   border: none;
   border-top-left-radius: var(--radius-sm);
   border-bottom-left-radius: var(--radius-sm);
-  border-right: 1px solid #dcdcdc;
+  border-right: 1px solid var(--border-medium);
   cursor: pointer;
   outline: none;
 }
@@ -298,14 +385,14 @@ header {
   border: none;
   outline: none;
   color: var(--text-primary);
-  background-color: #ffffff;
+  background-color: var(--amazon-card-bg);
 }
 
 .clear-search-btn {
-  background: #ffffff;
+  background: var(--amazon-card-bg);
   border: none;
   padding: 0 10px;
-  color: #888888;
+  color: var(--text-muted);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -322,8 +409,8 @@ header {
   justify-content: center;
   align-items: center;
   font-size: 1.15rem;
-  color: #111111;
-  background-color: var(--amazon-yellow);
+  color: var(--action-solid-text);
+  background-color: var(--action-solid);
   border: none;
   border-top-right-radius: var(--radius-sm);
   border-bottom-right-radius: var(--radius-sm);
@@ -332,7 +419,8 @@ header {
 }
 
 .search-icon:hover {
-  background-color: var(--amazon-yellow-hover);
+  background-color: var(--action-solid-hover);
+  color: var(--action-solid-text);
 }
 
 /* Language Selector */
@@ -360,11 +448,11 @@ header {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #ffffff;
+  background-color: var(--amazon-card-bg);
   color: var(--text-primary);
   box-shadow: var(--shadow-md);
   border-radius: var(--radius-sm);
-  border: 1px solid #dddddd;
+  border: 1px solid var(--border-subtle);
   list-style: none;
   width: 150px;
   padding: 6px 0;
@@ -387,8 +475,8 @@ header {
 }
 
 .dropdown-menu li:hover {
-  background-color: #f0f2f2;
-  color: var(--amazon-link);
+  background-color: var(--border-subtle);
+  color: var(--text-primary);
 }
 
 .dropdown-menu li i {
@@ -521,7 +609,8 @@ header {
   width: 360px;
   max-width: 85vw;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: var(--amazon-body-bg);
+  border-right: 1px solid var(--border-subtle);
   z-index: 1000;
   transform: translateX(-100%);
   transition: transform var(--transition-drawer);
@@ -569,14 +658,14 @@ header {
 }
 
 .drawer-section {
-  border-bottom: 1px solid #e7e7e7;
+  border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 14px;
   margin-bottom: 14px;
 }
 
 .drawer-section h3 {
   font-size: 0.95rem;
-  color: #111111;
+  color: var(--text-secondary);
   font-weight: 700;
   padding: 8px 24px;
   text-transform: uppercase;
@@ -592,20 +681,20 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 24px;
-  color: #333333;
+  color: var(--text-primary);
   text-decoration: none;
   font-size: 0.9rem;
   transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
 .drawer-section li a:hover {
-  background-color: #f1f2f2;
-  color: var(--amazon-link);
+  background-color: var(--border-subtle);
+  color: var(--text-primary);
 }
 
 .drawer-section li a i {
   font-size: 0.75rem;
-  color: #888888;
+  color: var(--text-muted);
 }
 
 /* Drawers backdrop overlay */
@@ -638,7 +727,8 @@ header {
   width: 420px;
   max-width: 90vw;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: var(--amazon-body-bg);
+  border-left: 1px solid var(--border-subtle);
   z-index: 1000;
   transform: translateX(100%);
   transition: transform var(--transition-drawer);
@@ -680,7 +770,7 @@ header {
   flex: 1;
   overflow-y: auto;
   padding: 18px;
-  background-color: #f8f9f9;
+  background-color: var(--amazon-body-bg);
 }
 
 .empty-cart-view {
@@ -705,7 +795,8 @@ header {
 .cart-item-card {
   display: flex;
   gap: 12px;
-  background: #ffffff;
+  background: var(--amazon-card-bg);
+  border: 1px solid var(--border-subtle);
   padding: 14px;
   border-radius: var(--radius-md);
   margin-bottom: 12px;
@@ -736,7 +827,7 @@ header {
 .cart-item-price {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #b12704;
+  color: var(--text-primary);
 }
 
 .cart-item-controls {
@@ -749,8 +840,8 @@ header {
 .btn-qty {
   width: 24px;
   height: 24px;
-  border: 1px solid #cccccc;
-  background: #f0f2f2;
+  border: 1px solid var(--border-subtle);
+  background: var(--border-subtle);
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-weight: 700;
@@ -771,8 +862,9 @@ header {
 
 .cart-drawer-footer {
   padding: 18px 20px;
-  border-top: 1px solid #e3e6e6;
-  background-color: #ffffff;
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--amazon-card-bg);
+  color: var(--text-primary);
 }
 
 .cart-subtotal {
@@ -786,8 +878,8 @@ header {
 .btn-checkout {
   width: 100%;
   padding: 12px;
-  background-color: var(--amazon-yellow);
-  color: var(--text-primary);
+  background-color: var(--action-solid);
+  color: var(--action-solid-text);
   font-weight: 700;
   font-size: 0.95rem;
   border: none;
@@ -798,7 +890,8 @@ header {
 }
 
 .btn-checkout:hover {
-  background-color: var(--amazon-yellow-hover);
+  background-color: var(--action-solid-hover);
+  color: var(--action-solid-text);
 }
 
 .btn-clear-cart {
@@ -837,13 +930,15 @@ header {
 }
 
 .modal-dialog {
-  background: #ffffff;
+  background: var(--amazon-card-bg);
+  border: 1px solid var(--border-subtle);
   width: 440px;
   max-width: 90vw;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
   animation: modalScale 0.25s ease-out;
+  color: var(--text-primary);
 }
 
 @keyframes modalScale {
@@ -856,7 +951,8 @@ header {
 }
 
 .modal-header {
-  background-color: #f0f2f2;
+  background-color: var(--border-subtle);
+  color: var(--text-primary);
   padding: 14px 20px;
   display: flex;
   justify-content: space-between;
@@ -929,15 +1025,16 @@ header {
 
 .modal-footer {
   padding: 12px 20px;
-  background-color: #f0f2f2;
+  background-color: var(--border-subtle);
   text-align: right;
-  border-top: 1px solid #d5d9d9;
+  border-top: 1px solid var(--border-medium);
 }
 
 .btn-save-location {
   padding: 8px 24px;
-  background-color: var(--amazon-yellow);
-  border: 1px solid #a88734;
+  background-color: var(--action-solid);
+  color: var(--action-solid-text);
+  border: 1px solid var(--action-solid);
   border-radius: var(--radius-sm);
   font-weight: 700;
   font-size: 0.88rem;
@@ -948,7 +1045,7 @@ header {
    8. HERO BANNER SECTION
    -------------------------------------------------------------------------- */
 .hero-section {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, var(--amazon-body-bg) 100%),
+  background-image: linear-gradient(to bottom, rgba(33, 27, 26, 0.25) 30%, var(--amazon-body-bg) 100%),
     url('hero_image.jpg');
   background-size: cover;
   background-position: center top;
@@ -961,8 +1058,9 @@ header {
 }
 
 .hero-msg {
-  background-color: #f5f6f6;
+  background-color: var(--amazon-card-bg);
   color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
   min-height: 44px;
   padding: 10px 20px;
   display: flex;
@@ -999,7 +1097,9 @@ header {
   max-width: 1460px;
   margin: 10px auto 0;
   width: 95%;
-  background: #ffffff;
+  background: var(--amazon-card-bg);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
   padding: 10px 18px;
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
@@ -1011,10 +1111,11 @@ header {
 }
 
 .btn-reset-filter {
-  background: var(--amazon-yellow);
-  border: 1px solid #d5a32b;
+  background: var(--action-solid);
+  color: var(--action-solid-text);
+  border: 1px solid var(--action-solid);
   padding: 6px 14px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
@@ -1023,33 +1124,8 @@ header {
   gap: 6px;
 }
 
-/* --------------------------------------------------------------------------
-   10. CMS-DRIVEN PRODUCT SHOP SECTION (FLUID GRID)
-   -------------------------------------------------------------------------- */
-.shop-section {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  max-width: 1460px;
-  width: 95%;
-  margin: -100px auto 30px;
-  position: relative;
-  z-index: 3;
-}
-
-.box {
-  background-color: var(--amazon-card-bg);
-  padding: 20px 18px 16px;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-  position: relative;
-  overflow: hidden;
-}
-
 .box:hover {
+  border-color: var(--border-medium);
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
@@ -1076,7 +1152,7 @@ header {
 }
 
 .box h2 {
-  font-size: 1.15rem;
+  font-size: 1.28rem;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.3;
@@ -1107,13 +1183,13 @@ header {
 }
 
 .box-price {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #b12704;
+  color: var(--text-primary);
 }
 
 .box-rating {
-  color: #007185;
+  color: var(--text-secondary);
   font-size: 0.82rem;
   display: flex;
   align-items: center;
@@ -1130,14 +1206,14 @@ header {
   align-items: center;
   justify-content: space-between;
   padding-top: 8px;
-  border-top: 1px solid #f2f2f2;
+  border-top: 1px solid var(--border-subtle);
 }
 
 .btn-add-cart {
-  background-color: var(--amazon-yellow);
-  color: var(--text-primary);
-  border: 1px solid #a88734;
-  border-radius: var(--radius-full);
+  background-color: var(--action-solid);
+  color: var(--action-solid-text);
+  border: 1px solid var(--action-solid);
+  border-radius: 4px;
   padding: 6px 14px;
   font-size: 0.82rem;
   font-weight: 600;
@@ -1146,11 +1222,12 @@ header {
 }
 
 .btn-add-cart:hover {
-  background-color: var(--amazon-yellow-hover);
+  background-color: var(--action-solid-hover);
+  color: var(--action-solid-text);
 }
 
 .see-more-link {
-  color: var(--amazon-link);
+  color: var(--text-secondary);
   font-size: 0.85rem;
   text-decoration: none;
   font-weight: 500;
@@ -1163,13 +1240,15 @@ header {
 
 /* No results fallback view */
 .no-results-view {
-  background: #ffffff;
+  background: var(--amazon-card-bg);
+  border: 1px solid var(--border-subtle);
   max-width: 600px;
   margin: 30px auto;
   padding: 40px 20px;
   border-radius: var(--radius-md);
   text-align: center;
   box-shadow: var(--shadow-sm);
+  color: var(--text-primary);
 }
 
 .no-results-view i {
@@ -1230,8 +1309,8 @@ footer {
 
 .foot-panel1 {
   width: 100%;
-  background-color: #37475a;
-  color: var(--text-white);
+  background-color: var(--amazon-subnav-bg);
+  color: var(--text-secondary);
   height: 50px;
   display: flex;
   justify-content: center;
@@ -1241,15 +1320,18 @@ footer {
   border: none;
   cursor: pointer;
   gap: 8px;
+  border-top: 1px solid var(--border-subtle);
   transition: background-color var(--transition-fast);
 }
 
 .foot-panel1:hover {
-  background-color: #485769;
+  background-color: var(--border-subtle);
+  color: var(--text-primary);
 }
 
 .foot-panel2 {
-  background-color: var(--amazon-subnav-bg);
+  background-color: var(--amazon-body-bg);
+  border-top: 1px solid var(--border-subtle);
   color: var(--text-white);
   padding: 40px 14px;
   display: grid;
@@ -1260,9 +1342,10 @@ footer {
 }
 
 .foot-column h3 {
-  font-size: 0.98rem;
+  font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 14px;
+  color: var(--text-primary);
 }
 
 .foot-column ul {
@@ -1274,7 +1357,7 @@ footer {
 }
 
 .foot-column ul li a {
-  color: #dddddd;
+  color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.85rem;
   transition: color var(--transition-fast);
@@ -1287,7 +1370,7 @@ footer {
 
 .foot-panel3 {
   background-color: var(--amazon-subnav-bg);
-  border-top: 1px solid #3a4553;
+  border-top: 1px solid var(--border-subtle);
   padding: 24px 14px;
   display: flex;
   justify-content: center;
@@ -1304,8 +1387,8 @@ footer {
 
 .foot-btn {
   background: transparent;
-  border: 1px solid #848688;
-  color: #cccccc;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
   padding: 6px 14px;
   border-radius: var(--radius-sm);
   font-size: 0.82rem;
@@ -1322,8 +1405,9 @@ footer {
 }
 
 .foot-panel4 {
-  background-color: #131a22;
-  color: #999999;
+  background-color: var(--amazon-nav-belt);
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
   padding: 30px 14px;
   text-align: center;
   font-size: 0.75rem;
@@ -1454,4 +1538,65 @@ footer {
   .pages {
     gap: 10px;
   }
+}
+
+
+/* --------------------------------------------------------------------------
+   PALETTE SWITCHER COMPONENT
+   -------------------------------------------------------------------------- */
+.palette-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 4px 8px;
+  background-color: rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.palette-switcher-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-right: 4px;
+}
+
+.palette-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.palette-btn:hover {
+  background-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.palette-btn.active {
+  background-color: var(--border-subtle);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+.palette-swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  display: inline-block;
+  flex-shrink: 0;
 }

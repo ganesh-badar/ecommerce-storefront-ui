@@ -663,12 +663,41 @@
   /* --------------------------------------------------------------------------
      11. INITIALIZATION ON DOM READY
      -------------------------------------------------------------------------- */
+
+  /* --------------------------------------------------------------------------
+     10b. INTERACTIVE PALETTE SWITCHER (Palettes 1, 2, 3)
+     -------------------------------------------------------------------------- */
+  function applyPalette(paletteId) {
+    document.documentElement.setAttribute('data-palette', paletteId);
+    const btns = document.querySelectorAll('.palette-btn');
+    btns.forEach(btn => {
+      const isMatch = btn.getAttribute('data-palette-target') === String(paletteId);
+      btn.classList.toggle('active', isMatch);
+      btn.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+    });
+  }
+
+  function initPaletteSwitcher() {
+    const savedPalette = localStorage.getItem('amazon_clone_palette') || '3';
+    applyPalette(savedPalette);
+
+    const btns = document.querySelectorAll('.palette-btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-palette-target');
+        applyPalette(target);
+        localStorage.setItem('amazon_clone_palette', target);
+      });
+    });
+  }
+
   function init() {
     if (DOM.currentLocation) {
       DOM.currentLocation.textContent = state.location;
     }
     updateCartUI();
     initEventListeners();
+    initPaletteSwitcher();
   }
 
   if (document.readyState === 'loading') {
