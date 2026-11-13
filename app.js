@@ -1,14 +1,12 @@
 /**
  * ==============================================================================
- * AMAZON CLONE UI - CORE APPLICATION LOGIC (app.js)
- * ------------------------------------------------------------------------------
+ * APPLE FLAGSHIP STORE & PRODUCT SHOWCASE — APP LOGIC (app.js)
  * Features:
- *  1. Dynamic CMS Catalog Hydration & Schema Architecture
- *  2. Real-time Debounced Search & Multi-Category Filtering
- *  3. Interactive Cart System with Slide-out Drawer & LocalStorage Persistence
- *  4. Side Navigation Drawer (Amazon 'All' Menu) & Modals
- *  5. Location Selector & Language Dropdown State
- *  6. Smooth UX Enhancements (Back-to-top, Toast notifications, Accessibility)
+ *  1. Multi-Palette Theme Switcher (Cupertino, Espresso, Slate, Obsidian)
+ *  2. Interactive Shopping Bag System & Live Calculation
+ *  3. Slide-out Cart Drawer with LocalStorage Persistence
+ *  4. Apple TV+ Horizontal Streaming Carousel Controls
+ *  5. Toast Notifications & Accessible Micro-interactions
  * ==============================================================================
  */
 
@@ -16,688 +14,309 @@
   'use strict';
 
   /* --------------------------------------------------------------------------
-     1. CMS-DRIVEN PRODUCT CATALOG DATA SCHEMA
-     Demonstrates structured content modeling & headless CMS authoring readiness.
-     -------------------------------------------------------------------------- */
-  const CATALOG_DATA = [
-    {
-      id: 1,
-      title: 'Refresh your space',
-      category: 'Home',
-      image: 'box1_image.jpg',
-      badge: 'Popular',
-      price: 29.99,
-      rating: 4.7,
-      reviews: '1.2k'
-    },
-    {
-      id: 2,
-      title: 'Health & Personal Care',
-      category: 'Beauty',
-      image: 'box2_image.jpg',
-      badge: 'Essential',
-      price: 18.5,
-      rating: 4.6,
-      reviews: '950'
-    },
-    {
-      id: 3,
-      title: 'Give your home a makeover',
-      category: 'Home',
-      image: 'box3_image.jpg',
-      badge: 'Trending',
-      price: 45.0,
-      rating: 4.8,
-      reviews: '2.4k'
-    },
-    {
-      id: 4,
-      title: 'Electronics & Devices',
-      category: 'Electronics',
-      image: 'box4_image.jpg',
-      badge: 'Top Deal',
-      price: 89.99,
-      rating: 4.9,
-      reviews: '4.1k'
-    },
-    {
-      id: 5,
-      title: 'Beauty Picks',
-      category: 'Beauty',
-      image: 'box5_image.jpg',
-      badge: 'Featured',
-      price: 24.99,
-      rating: 4.5,
-      reviews: '820'
-    },
-    {
-      id: 6,
-      title: 'Shop Pet supplies',
-      category: 'Home',
-      image: 'box6_image.jpg',
-      badge: 'Best Value',
-      price: 15.99,
-      rating: 4.7,
-      reviews: '1.5k'
-    },
-    {
-      id: 7,
-      title: 'New arrivals in Toys',
-      category: 'Toys',
-      image: 'box7_image.jpg',
-      badge: 'New',
-      price: 19.99,
-      rating: 4.8,
-      reviews: '670'
-    },
-    {
-      id: 8,
-      title: 'Discover fashion trends',
-      category: 'Fashion',
-      image: 'box8_image.jpg',
-      badge: 'Hot',
-      price: 39.0,
-      rating: 4.4,
-      reviews: '3.1k'
-    },
-    {
-      id: 9,
-      title: 'For your Fitness Needs',
-      category: 'Fitness',
-      image: 'box9_image.jpg',
-      badge: 'Trending',
-      price: 34.5,
-      rating: 4.7,
-      reviews: '890'
-    },
-    {
-      id: 10,
-      title: 'Activity Trackers & Smartwatches',
-      category: 'Electronics',
-      image: 'box10_image.jpg',
-      badge: 'Smart Tech',
-      price: 79.99,
-      rating: 4.8,
-      reviews: '5.2k'
-    },
-    {
-      id: 11,
-      title: 'Home & Kitchen Under $30',
-      category: 'Home',
-      image: 'box11_image.jpg',
-      badge: 'Under $30',
-      price: 22.95,
-      rating: 4.6,
-      reviews: '1.8k'
-    },
-    {
-      id: 12,
-      title: 'Shop Laptops & Tablets',
-      category: 'Electronics',
-      image: 'box12_image.jpg',
-      badge: 'Premium',
-      price: 499.0,
-      rating: 4.9,
-      reviews: '6.3k'
-    }
-  ];
-
-  /* --------------------------------------------------------------------------
-     2. APPLICATION STATE
+     1. STATE MANAGEMENT
      -------------------------------------------------------------------------- */
   const state = {
-    cart: JSON.parse(localStorage.getItem('amazon_clone_cart')) || [],
-    location: localStorage.getItem('amazon_clone_location') || 'India',
-    currentCategory: 'all',
-    searchQuery: '',
-    selectedLang: 'EN'
+    cart: JSON.parse(localStorage.getItem('apple_store_cart')) || [],
+    palette: localStorage.getItem('apple_store_palette') || 'cupertino'
   };
 
   /* --------------------------------------------------------------------------
-     3. DOM ELEMENTS CACHE
+     2. DOM REFERENCES
      -------------------------------------------------------------------------- */
   const DOM = {
-    // Navigation
-    searchInput: document.getElementById('searchInput'),
-    searchSelect: document.getElementById('searchCategory'),
-    searchForm: document.getElementById('searchForm'),
-    clearSearchBtn: document.getElementById('clearSearchBtn'),
-    cartBtn: document.getElementById('cartBtn'),
-    cartCount: document.getElementById('cartCount'),
-    locationBtn: document.getElementById('locationBtn'),
-    currentLocation: document.getElementById('currentLocation'),
-    langSelector: document.getElementById('langSelector'),
-    langMenu: document.getElementById('langMenu'),
-    selectedLang: document.getElementById('selectedLang'),
-
-    // Shop Grid & Filters
-    shopSection: document.getElementById('shopSection'),
-    filterStatusBar: document.getElementById('filterStatusBar'),
-    filterStatusText: document.getElementById('filterStatusText'),
-    resetFilterBtn: document.getElementById('resetFilterBtn'),
-    noResultsView: document.getElementById('noResultsView'),
-    noResultsResetBtn: document.getElementById('noResultsResetBtn'),
-
-    // Side Navigation Drawer
-    openMenuBtn: document.getElementById('openMenuBtn'),
-    closeMenuBtn: document.getElementById('closeMenuBtn'),
-    sideDrawer: document.getElementById('sideDrawer'),
-    drawerOverlay: document.getElementById('drawerOverlay'),
-
-    // Cart Drawer
-    cartDrawer: document.getElementById('cartDrawer'),
-    closeCartBtn: document.getElementById('closeCartBtn'),
-    cartOverlay: document.getElementById('cartOverlay'),
-    cartDrawerItems: document.getElementById('cartDrawerItems'),
-    cartTotalItems: document.getElementById('cartTotalItems'),
-    cartTotalPrice: document.getElementById('cartTotalPrice'),
+    paletteBtns: document.querySelectorAll('.palette-btn'),
+    navBagBtn: document.getElementById('navBagBtn'),
+    bagBadge: document.getElementById('bagBadge'),
+    cartDrawerOverlay: document.getElementById('cartDrawerOverlay'),
+    cartCloseBtn: document.getElementById('cartCloseBtn'),
+    cartItemsContainer: document.getElementById('cartItemsContainer'),
+    cartSubtotal: document.getElementById('cartSubtotal'),
+    cartEmiNote: document.getElementById('cartEmiNote'),
     checkoutBtn: document.getElementById('checkoutBtn'),
-    clearCartBtn: document.getElementById('clearCartBtn'),
-
-    // Location Modal
-    locationModal: document.getElementById('locationModal'),
-    modalOverlay: document.getElementById('modalOverlay'),
-    closeLocationModal: document.getElementById('closeLocationModal'),
-    countrySelect: document.getElementById('countrySelect'),
-    pincodeInput: document.getElementById('pincodeInput'),
-    applyPincodeBtn: document.getElementById('applyPincodeBtn'),
-    saveLocationBtn: document.getElementById('saveLocationBtn'),
-
-    // Back to top & Toast
-    backToTopBtn: document.getElementById('backToTopBtn'),
-    toast: document.getElementById('toast')
+    streamPrevBtn: document.getElementById('streamPrevBtn'),
+    streamNextBtn: document.getElementById('streamNextBtn'),
+    streamCarouselTrack: document.getElementById('streamCarouselTrack'),
+    toastNotice: document.getElementById('toastNotice'),
+    tradeInBtn: document.getElementById('tradeInBtn'),
+    navSearchBtn: document.getElementById('navSearchBtn')
   };
 
   /* --------------------------------------------------------------------------
-     4. TOAST NOTIFICATIONS
+     3. TOAST NOTIFICATIONS
      -------------------------------------------------------------------------- */
-  let toastTimeout;
+  let toastTimer = null;
   function showToast(message) {
-    if (!DOM.toast) return;
-    DOM.toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${message}`;
-    DOM.toast.classList.add('show');
-    clearTimeout(toastTimeout);
-    toastTimeout = setTimeout(() => {
-      DOM.toast.classList.remove('show');
-    }, 3200);
+    if (!DOM.toastNotice) return;
+    DOM.toastNotice.textContent = message;
+    DOM.toastNotice.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      DOM.toastNotice.classList.remove('show');
+    }, 2800);
   }
 
   /* --------------------------------------------------------------------------
-     5. CART MANAGEMENT
+     4. PALETTE THEME SWITCHER
      -------------------------------------------------------------------------- */
-  function saveCart() {
-    localStorage.setItem('amazon_clone_cart', JSON.stringify(state.cart));
-    updateCartUI();
+  function applyPalette(paletteKey) {
+    state.palette = paletteKey;
+    document.documentElement.setAttribute('data-palette', paletteKey);
+    localStorage.setItem('apple_store_palette', paletteKey);
+
+    DOM.paletteBtns.forEach((btn) => {
+      const isTarget = btn.getAttribute('data-palette-target') === paletteKey;
+      btn.classList.toggle('active', isTarget);
+      btn.setAttribute('aria-pressed', isTarget ? 'true' : 'false');
+    });
   }
 
-  function addToCart(productId) {
-    const product = CATALOG_DATA.find((item) => item.id === productId);
-    if (!product) return;
+  function initPaletteSwitcher() {
+    applyPalette(state.palette);
+    DOM.paletteBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-palette-target');
+        applyPalette(target);
+        const nameMap = {
+          cupertino: 'Cupertino Dark',
+          3: 'Espresso Bronze (#211B1A)',
+          1: 'Slate Steel (#111522)',
+          2: 'Obsidian Velvet (#17151C)'
+        };
+        showToast(`Theme switched to ${nameMap[target] || target}`);
+      });
+    });
+  }
 
-    const existingIndex = state.cart.findIndex((item) => item.id === productId);
-    if (existingIndex > -1) {
-      state.cart[existingIndex].quantity += 1;
+  /* --------------------------------------------------------------------------
+     5. SHOPPING BAG LOGIC
+     -------------------------------------------------------------------------- */
+  function saveCart() {
+    localStorage.setItem('apple_store_cart', JSON.stringify(state.cart));
+  }
+
+  function formatCurrency(amount) {
+    return '₹' + Number(amount).toLocaleString('en-IN');
+  }
+
+  function calculateCartTotal() {
+    return state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  }
+
+  function updateCartUI() {
+    const totalCount = state.cart.reduce((count, item) => count + item.quantity, 0);
+    if (DOM.bagBadge) {
+      DOM.bagBadge.textContent = totalCount;
+      DOM.bagBadge.style.display = totalCount > 0 ? 'inline-flex' : 'none';
+    }
+
+    if (!DOM.cartItemsContainer) return;
+
+    if (state.cart.length === 0) {
+      DOM.cartItemsContainer.innerHTML =
+        '<p class="cart-empty-message">Your bag is currently empty.</p>';
+      if (DOM.cartSubtotal) DOM.cartSubtotal.textContent = '₹0';
+      if (DOM.cartEmiNote)
+        DOM.cartEmiNote.textContent = 'Or ₹0/mo with 6 months No Cost EMI.‡';
+      return;
+    }
+
+    const total = calculateCartTotal();
+    const emi = Math.round(total / 6);
+
+    if (DOM.cartSubtotal) DOM.cartSubtotal.textContent = formatCurrency(total);
+    if (DOM.cartEmiNote) {
+      DOM.cartEmiNote.textContent = `Or ${formatCurrency(emi)}/mo with 6 months No Cost EMI.‡`;
+    }
+
+    DOM.cartItemsContainer.innerHTML = state.cart
+      .map(
+        (item) => `
+        <div class="cart-item-row" data-id="${item.id}">
+          <div class="cart-item-thumb">
+            <i class="fa-solid fa-cube" aria-hidden="true"></i>
+          </div>
+          <div class="cart-item-info">
+            <h4 class="cart-item-name">${item.title}</h4>
+            <div class="cart-item-price tabular-num">${formatCurrency(item.price)}</div>
+            <div class="cart-item-actions">
+              <button type="button" class="cart-qty-btn btn-qty-minus" aria-label="Decrease quantity">-</button>
+              <span class="tabular-num">${item.quantity}</span>
+              <button type="button" class="cart-qty-btn btn-qty-plus" aria-label="Increase quantity">+</button>
+              <button type="button" class="cart-item-remove" aria-label="Remove item">Remove</button>
+            </div>
+          </div>
+        </div>
+      `
+      )
+      .join('');
+
+    // Attach item listeners
+    DOM.cartItemsContainer.querySelectorAll('.cart-item-row').forEach((row) => {
+      const id = row.getAttribute('data-id');
+      const item = state.cart.find((i) => i.id === id);
+
+      row.querySelector('.btn-qty-plus').addEventListener('click', () => {
+        if (item) {
+          item.quantity += 1;
+          saveCart();
+          updateCartUI();
+        }
+      });
+
+      row.querySelector('.btn-qty-minus').addEventListener('click', () => {
+        if (item) {
+          if (item.quantity > 1) {
+            item.quantity -= 1;
+          } else {
+            state.cart = state.cart.filter((i) => i.id !== id);
+          }
+          saveCart();
+          updateCartUI();
+        }
+      });
+
+      row.querySelector('.cart-item-remove').addEventListener('click', () => {
+        state.cart = state.cart.filter((i) => i.id !== id);
+        saveCart();
+        updateCartUI();
+        showToast('Item removed from bag');
+      });
+    });
+  }
+
+  function addToBag(product) {
+    const existing = state.cart.find((item) => item.id === product.id);
+    if (existing) {
+      existing.quantity += 1;
     } else {
       state.cart.push({
         id: product.id,
         title: product.title,
-        price: product.price,
-        image: product.image,
+        price: Number(product.price),
         quantity: 1
       });
     }
-
     saveCart();
-    showToast(`Added "${product.title}" to cart!`);
-  }
-
-  function removeFromCart(productId) {
-    state.cart = state.cart.filter((item) => item.id !== productId);
-    saveCart();
-    showToast('Item removed from cart.');
-  }
-
-  function updateItemQuantity(productId, delta) {
-    const item = state.cart.find((item) => item.id === productId);
-    if (!item) return;
-
-    item.quantity += delta;
-    if (item.quantity <= 0) {
-      removeFromCart(productId);
-    } else {
-      saveCart();
-    }
-  }
-
-  function clearCart() {
-    state.cart = [];
-    saveCart();
-    showToast('Your shopping cart has been cleared.');
-  }
-
-  function updateCartUI() {
-    const totalItems = state.cart.reduce((sum, item) => sum + item.quantity, 0);
-    const totalPrice = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-    // Update navbar badge
-    if (DOM.cartCount) {
-      DOM.cartCount.textContent = totalItems;
-      DOM.cartBtn.setAttribute('aria-label', `Shopping Cart, ${totalItems} items`);
-    }
-
-    // Update cart drawer items
-    if (DOM.cartTotalItems) DOM.cartTotalItems.textContent = totalItems;
-    if (DOM.cartTotalPrice) DOM.cartTotalPrice.textContent = `$${totalPrice.toFixed(2)}`;
-
-    if (!DOM.cartDrawerItems) return;
-
-    if (state.cart.length === 0) {
-      DOM.cartDrawerItems.innerHTML = `
-        <div class="empty-cart-view">
-          <i class="fa-solid fa-basket-shopping empty-icon"></i>
-          <p>Your Amazon Cart is empty.</p>
-          <small>Check out product boxes and click "Add to Cart" to start shopping!</small>
-        </div>
-      `;
-    } else {
-      DOM.cartDrawerItems.innerHTML = state.cart
-        .map(
-          (item) => `
-          <div class="cart-item-card" data-id="${item.id}">
-            <div class="cart-item-img" style="background-image: url('${item.image}')"></div>
-            <div class="cart-item-info">
-              <h4 class="cart-item-title">${escapeHTML(item.title)}</h4>
-              <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
-              <div class="cart-item-controls">
-                <button type="button" class="btn-qty btn-minus" data-id="${item.id}" aria-label="Decrease quantity">-</button>
-                <span class="qty-count">${item.quantity}</span>
-                <button type="button" class="btn-qty btn-plus" data-id="${item.id}" aria-label="Increase quantity">+</button>
-                <button type="button" class="btn-remove-item" data-id="${item.id}">Delete</button>
-              </div>
-            </div>
-          </div>
-        `
-        )
-        .join('');
-    }
+    updateCartUI();
+    openCartDrawer();
+    showToast(`Added ${product.title} to bag`);
   }
 
   function openCartDrawer() {
-    updateCartUI();
-    DOM.cartDrawer.classList.add('open');
-    DOM.cartDrawer.setAttribute('aria-hidden', 'false');
-    DOM.cartOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    if (DOM.cartDrawerOverlay) {
+      DOM.cartDrawerOverlay.classList.add('active');
+      DOM.cartDrawerOverlay.setAttribute('aria-hidden', 'false');
+    }
   }
 
   function closeCartDrawer() {
-    DOM.cartDrawer.classList.remove('open');
-    DOM.cartDrawer.setAttribute('aria-hidden', 'true');
-    DOM.cartOverlay.classList.remove('open');
-    document.body.style.overflow = '';
+    if (DOM.cartDrawerOverlay) {
+      DOM.cartDrawerOverlay.classList.remove('active');
+      DOM.cartDrawerOverlay.setAttribute('aria-hidden', 'true');
+    }
   }
 
   /* --------------------------------------------------------------------------
-     6. PRODUCT FILTERING & SEARCH ENGINE
+     6. CAROUSEL & INTERACTIVITY
      -------------------------------------------------------------------------- */
-  function filterProducts() {
-    const query = state.searchQuery.trim().toLowerCase();
-    const category = state.currentCategory.toLowerCase();
+  function initCarousel() {
+    if (!DOM.streamCarouselTrack) return;
 
-    const filtered = CATALOG_DATA.filter((item) => {
-      const matchesCategory =
-        category === 'all' || item.category.toLowerCase() === category;
-      const matchesQuery =
-        !query ||
-        item.title.toLowerCase().includes(query) ||
-        item.category.toLowerCase().includes(query);
-      return matchesCategory && matchesQuery;
+    if (DOM.streamPrevBtn) {
+      DOM.streamPrevBtn.addEventListener('click', () => {
+        DOM.streamCarouselTrack.scrollBy({ left: -340, behavior: 'smooth' });
+      });
+    }
+
+    if (DOM.streamNextBtn) {
+      DOM.streamNextBtn.addEventListener('click', () => {
+        DOM.streamCarouselTrack.scrollBy({ left: 340, behavior: 'smooth' });
+      });
+    }
+
+    document.querySelectorAll('.btn-stream').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const show = btn.getAttribute('data-show');
+        showToast(`Streaming preview: "${show}" in 4K HDR...`);
+      });
     });
-
-    renderShopGrid(filtered);
-
-    // Update filter status bar
-    const hasFilter = query || category !== 'all';
-    if (DOM.filterStatusBar) {
-      if (hasFilter) {
-        DOM.filterStatusBar.style.display = 'flex';
-        let status = `Showing ${filtered.length} item(s)`;
-        if (category !== 'all') status += ` in category "${state.currentCategory}"`;
-        if (query) status += ` matching "${escapeHTML(query)}"`;
-        DOM.filterStatusText.textContent = status;
-      } else {
-        DOM.filterStatusBar.style.display = 'none';
-      }
-    }
-
-    // Toggle empty state
-    if (DOM.noResultsView) {
-      DOM.noResultsView.style.display = filtered.length === 0 ? 'block' : 'none';
-    }
-  }
-
-  function renderShopGrid(items) {
-    if (!DOM.shopSection) return;
-
-    if (items.length === 0) {
-      DOM.shopSection.style.display = 'none';
-      return;
-    }
-
-    DOM.shopSection.style.display = 'grid';
-    DOM.shopSection.innerHTML = items
-      .map(
-        (item) => `
-        <article class="box" data-id="${item.id}" data-category="${item.category}" data-title="${escapeHTML(item.title)}">
-          <div class="box-content">
-            <span class="box-badge">${escapeHTML(item.badge)}</span>
-            <h2>${escapeHTML(item.title)}</h2>
-            <div class="box-img" style="background-image: url('${item.image}')" role="img" aria-label="${escapeHTML(item.title)}"></div>
-            <div class="box-meta">
-              <span class="box-price">$${item.price.toFixed(2)}</span>
-              <span class="box-rating"><i class="fa-solid fa-star"></i> ${item.rating} (${item.reviews})</span>
-            </div>
-            <div class="box-actions">
-              <button type="button" class="btn-add-cart" data-id="${item.id}">Add to Cart</button>
-              <a href="#see-more-${item.id}" class="see-more-link">See more</a>
-            </div>
-          </div>
-        </article>
-      `
-      )
-      .join('');
-  }
-
-  function resetAllFilters() {
-    state.searchQuery = '';
-    state.currentCategory = 'all';
-    if (DOM.searchInput) DOM.searchInput.value = '';
-    if (DOM.searchSelect) DOM.searchSelect.value = 'all';
-    if (DOM.clearSearchBtn) DOM.clearSearchBtn.style.display = 'none';
-    filterProducts();
   }
 
   /* --------------------------------------------------------------------------
-     7. SIDE NAVIGATION DRAWER (All Categories Menu)
-     -------------------------------------------------------------------------- */
-  function openSideDrawer() {
-    DOM.sideDrawer.classList.add('open');
-    DOM.sideDrawer.setAttribute('aria-hidden', 'false');
-    DOM.drawerOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeSideDrawer() {
-    DOM.sideDrawer.classList.remove('open');
-    DOM.sideDrawer.setAttribute('aria-hidden', 'true');
-    DOM.drawerOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  /* --------------------------------------------------------------------------
-     8. LOCATION MODAL LOGIC
-     -------------------------------------------------------------------------- */
-  function openLocationModal() {
-    DOM.locationModal.classList.add('open');
-    DOM.locationModal.setAttribute('aria-hidden', 'false');
-    DOM.modalOverlay.classList.add('open');
-    if (DOM.countrySelect) DOM.countrySelect.value = state.location;
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLocationModal() {
-    DOM.locationModal.classList.remove('open');
-    DOM.locationModal.setAttribute('aria-hidden', 'true');
-    DOM.modalOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function setLocation(loc) {
-    state.location = loc;
-    localStorage.setItem('amazon_clone_location', loc);
-    if (DOM.currentLocation) DOM.currentLocation.textContent = loc;
-    showToast(`Delivery location updated to: ${loc}`);
-    closeLocationModal();
-  }
-
-  /* --------------------------------------------------------------------------
-     9. EVENT LISTENERS & INITIALIZATION
+     7. EVENT LISTENERS INITIALIZATION
      -------------------------------------------------------------------------- */
   function initEventListeners() {
-    // Search input typing with dynamic clear button
-    if (DOM.searchInput) {
-      DOM.searchInput.addEventListener('input', (e) => {
-        state.searchQuery = e.target.value;
-        if (DOM.clearSearchBtn) {
-          DOM.clearSearchBtn.style.display = state.searchQuery ? 'flex' : 'none';
-        }
-        filterProducts();
-      });
-    }
-
-    if (DOM.clearSearchBtn) {
-      DOM.clearSearchBtn.addEventListener('click', () => {
-        state.searchQuery = '';
-        DOM.searchInput.value = '';
-        DOM.clearSearchBtn.style.display = 'none';
-        filterProducts();
-        DOM.searchInput.focus();
-      });
-    }
-
-    if (DOM.searchSelect) {
-      DOM.searchSelect.addEventListener('change', (e) => {
-        state.currentCategory = e.target.value;
-        filterProducts();
-      });
-    }
-
-    if (DOM.searchForm) {
-      DOM.searchForm.addEventListener('submit', (e) => {
+    // Buy buttons
+    document.querySelectorAll('.btn-add-bag').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
         e.preventDefault();
-        filterProducts();
+        const id = btn.getAttribute('data-id');
+        const title = btn.getAttribute('data-title');
+        const price = btn.getAttribute('data-price');
+        addToBag({ id, title, price });
       });
-    }
-
-    // Reset filter buttons
-    if (DOM.resetFilterBtn) DOM.resetFilterBtn.addEventListener('click', resetAllFilters);
-    if (DOM.noResultsResetBtn) DOM.noResultsResetBtn.addEventListener('click', resetAllFilters);
-
-    // Event delegation for "Add to Cart" and grid interactions
-    document.addEventListener('click', (e) => {
-      // Add to cart click
-      const addCartBtn = e.target.closest('.btn-add-cart');
-      if (addCartBtn) {
-        const id = parseInt(addCartBtn.getAttribute('data-id'), 10);
-        addToCart(id);
-        return;
-      }
-
-      // Cart quantity plus
-      const plusBtn = e.target.closest('.btn-plus');
-      if (plusBtn) {
-        const id = parseInt(plusBtn.getAttribute('data-id'), 10);
-        updateItemQuantity(id, 1);
-        return;
-      }
-
-      // Cart quantity minus
-      const minusBtn = e.target.closest('.btn-minus');
-      if (minusBtn) {
-        const id = parseInt(minusBtn.getAttribute('data-id'), 10);
-        updateItemQuantity(id, -1);
-        return;
-      }
-
-      // Delete from cart
-      const removeBtn = e.target.closest('.btn-remove-item');
-      if (removeBtn) {
-        const id = parseInt(removeBtn.getAttribute('data-id'), 10);
-        removeFromCart(id);
-        return;
-      }
-
-      // Side drawer category item click
-      const categoryLink = e.target.closest('.drawer-section a[data-category]');
-      if (categoryLink) {
-        e.preventDefault();
-        const cat = categoryLink.getAttribute('data-category');
-        state.currentCategory = cat;
-        if (DOM.searchSelect) DOM.searchSelect.value = cat;
-        filterProducts();
-        closeSideDrawer();
-        DOM.shopSection.scrollIntoView({ behavior: 'smooth' });
-        return;
-      }
     });
 
-    // Cart Drawer Open / Close
-    if (DOM.cartBtn) DOM.cartBtn.addEventListener('click', openCartDrawer);
-    if (DOM.closeCartBtn) DOM.closeCartBtn.addEventListener('click', closeCartDrawer);
-    if (DOM.cartOverlay) DOM.cartOverlay.addEventListener('click', closeCartDrawer);
+    // Nav Bag click
+    if (DOM.navBagBtn) {
+      DOM.navBagBtn.addEventListener('click', openCartDrawer);
+    }
 
-    if (DOM.clearCartBtn) DOM.clearCartBtn.addEventListener('click', clearCart);
-    if (DOM.checkoutBtn) {
-      DOM.checkoutBtn.addEventListener('click', () => {
-        if (state.cart.length === 0) {
-          showToast('Your cart is empty! Add products first.');
-        } else {
-          showToast('Checkout simulated! Thank you for testing the Amazon Clone.');
-          clearCart();
+    // Close bag drawer
+    if (DOM.cartCloseBtn) {
+      DOM.cartCloseBtn.addEventListener('click', closeCartDrawer);
+    }
+
+    if (DOM.cartDrawerOverlay) {
+      DOM.cartDrawerOverlay.addEventListener('click', (e) => {
+        if (e.target === DOM.cartDrawerOverlay) {
           closeCartDrawer();
         }
       });
     }
 
-    // Side Drawer Open / Close
-    if (DOM.openMenuBtn) DOM.openMenuBtn.addEventListener('click', openSideDrawer);
-    if (DOM.closeMenuBtn) DOM.closeMenuBtn.addEventListener('click', closeSideDrawer);
-    if (DOM.drawerOverlay) DOM.drawerOverlay.addEventListener('click', closeSideDrawer);
+    // Search button
+    if (DOM.navSearchBtn) {
+      DOM.navSearchBtn.addEventListener('click', () => {
+        showToast('Spotlight search: Type to explore Mac, iPad, iPhone...');
+      });
+    }
 
-    // Location Modal
-    if (DOM.locationBtn) DOM.locationBtn.addEventListener('click', openLocationModal);
-    if (DOM.closeLocationModal) DOM.closeLocationModal.addEventListener('click', closeLocationModal);
-    if (DOM.modalOverlay) DOM.modalOverlay.addEventListener('click', closeLocationModal);
+    // Trade In button
+    if (DOM.tradeInBtn) {
+      DOM.tradeInBtn.addEventListener('click', () => {
+        showToast('Apple Trade In: Select your current smartphone to get up to ₹42,500 credit.');
+      });
+    }
 
-    if (DOM.applyPincodeBtn) {
-      DOM.applyPincodeBtn.addEventListener('click', () => {
-        const pin = DOM.pincodeInput.value.trim();
-        if (pin) {
-          setLocation(pin);
-        } else {
-          showToast('Please enter a valid postal code.');
+    // Checkout button
+    if (DOM.checkoutBtn) {
+      DOM.checkoutBtn.addEventListener('click', () => {
+        if (state.cart.length === 0) {
+          showToast('Your bag is empty.');
+          return;
         }
+        showToast('Proceeding to Express Apple Pay Checkout...');
       });
     }
 
-    if (DOM.saveLocationBtn) {
-      DOM.saveLocationBtn.addEventListener('click', () => {
-        const country = DOM.countrySelect ? DOM.countrySelect.value : 'India';
-        setLocation(country);
-      });
-    }
-
-    // Language Selector Dropdown
-    if (DOM.langSelector) {
-      DOM.langSelector.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isShown = DOM.langMenu.classList.contains('show');
-        DOM.langMenu.classList.toggle('show');
-        DOM.langSelector.setAttribute('aria-expanded', !isShown);
-      });
-
-      // Language selection
-      if (DOM.langMenu) {
-        DOM.langMenu.querySelectorAll('li').forEach((li) => {
-          li.addEventListener('click', (e) => {
-            const lang = li.getAttribute('data-lang');
-            state.selectedLang = lang;
-            if (DOM.selectedLang) DOM.selectedLang.textContent = lang;
-            DOM.langMenu.querySelectorAll('li').forEach((el) => el.classList.remove('active'));
-            li.classList.add('active');
-            showToast(`Language set to ${li.textContent.trim()}`);
-          });
-        });
-      }
-    }
-
-    // Close language dropdown when clicking outside
-    document.addEventListener('click', () => {
-      if (DOM.langMenu && DOM.langMenu.classList.contains('show')) {
-        DOM.langMenu.classList.remove('show');
-        if (DOM.langSelector) DOM.langSelector.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    // Back to top button
-    if (DOM.backToTopBtn) {
-      DOM.backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-
-    // Keyboard accessibility: ESC key closes open modals/drawers
+    // ESC key closes drawer
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeSideDrawer();
         closeCartDrawer();
-        closeLocationModal();
-        if (DOM.langMenu) DOM.langMenu.classList.remove('show');
       }
     });
   }
 
   /* --------------------------------------------------------------------------
-     10. UTILITIES
+     8. APP BOOTSTRAP
      -------------------------------------------------------------------------- */
-  function escapeHTML(str) {
-    if (!str) return '';
-    return str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-  }
-
-  /* --------------------------------------------------------------------------
-     11. INITIALIZATION ON DOM READY
-     -------------------------------------------------------------------------- */
-
-  /* --------------------------------------------------------------------------
-     10b. INTERACTIVE PALETTE SWITCHER (Palettes 1, 2, 3)
-     -------------------------------------------------------------------------- */
-  function applyPalette(paletteId) {
-    document.documentElement.setAttribute('data-palette', paletteId);
-    const btns = document.querySelectorAll('.palette-btn');
-    btns.forEach(btn => {
-      const isMatch = btn.getAttribute('data-palette-target') === String(paletteId);
-      btn.classList.toggle('active', isMatch);
-      btn.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
-    });
-  }
-
-  function initPaletteSwitcher() {
-    const savedPalette = localStorage.getItem('amazon_clone_palette') || '3';
-    applyPalette(savedPalette);
-
-    const btns = document.querySelectorAll('.palette-btn');
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.getAttribute('data-palette-target');
-        applyPalette(target);
-        localStorage.setItem('amazon_clone_palette', target);
-      });
-    });
-  }
-
   function init() {
-    if (DOM.currentLocation) {
-      DOM.currentLocation.textContent = state.location;
-    }
-    updateCartUI();
-    initEventListeners();
     initPaletteSwitcher();
+    updateCartUI();
+    initCarousel();
+    initEventListeners();
   }
 
   if (document.readyState === 'loading') {

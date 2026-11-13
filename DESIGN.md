@@ -1,60 +1,87 @@
-# Design System — Amazon Clone UI (Educational Showcase)
+# Design System — Apple Flagship Store & UI Showcase
 
-## 1. Design Philosophy & System Identity
-- **Product Truth**: High-fidelity educational clone of Amazon's e-commerce marketplace interface.
-- **Mode**: Operate & Persuade — High information density, clear visual hierarchy, accessible e-commerce scanability.
-- **Color Theme**: Palette 3 — Espresso Bronze Warm Theme (`#211B1A` → `#E8D8CE`).
-- **Craft Floor Rules**: Zero gradient text, crisp borders/shadows, browser surface theming (selection, scrollbars, focus ring, tabular nums), minimum functional font size of 12px.
+## 1. Product Truth & Design Philosophy
+- **Product Truth**: High-fidelity recreation of the Apple Flagship Store and Cupertino product showcase based on the official specification and layout hierarchy.
+- **Visual Language**: Minimalist Cupertino typography, frosted glass sticky navigation, full-bleed cinematic hero showcases, modular 2x3 bento product grid, horizontal media streaming carousel (Apple TV+), and structured 5-column directory footer.
+- **Craft Floor Rules**: Zero gradient text, high contrast (WCAG AA compliant: ≥4.5:1), tabular numerals on all prices and numerical specs, smooth micro-interactions, zero layout shifting.
 
-## 2. Color Palette (Espresso Bronze)
+---
+
+## 2. Color Palette & Token Architecture
+The design system supports 4 architectural color ramps, selectable directly from the navigation bar:
+
+### Signature Theme: Cupertino Titanium Dark (`data-palette="cupertino"`)
 ```css
-:root {
-  /* Surfaces & Nav Belts (#211B1A → #E8D8CE ramp) */
-  --amazon-nav-bg: #211B1A;      /* Deep espresso primary navigation */
-  --amazon-nav-belt: #211B1A;
-  --amazon-subnav-bg: #382A28;   /* Elevated subnav panel */
-  --amazon-body-bg: #eaeded;     /* Neutral high-contrast backdrop */
-  --amazon-card-bg: #ffffff;
-
-  /* Warm Copper Accents */
-  --palette-dark-1: #211B1A;
-  --palette-dark-2: #382A28;
-  --palette-dark-3: #60433D;
-  --palette-text-muted: #916B60;
-  --palette-text-secondary: #C1A094;
-  --palette-text-primary: #E8D8CE;
-
-  /* E-Commerce Actions */
-  --amazon-yellow: #febd69;
-  --amazon-yellow-hover: #f3a847;
-  --amazon-orange: #f08804;
-  --amazon-orange-hover: #d67400;
-
-  /* Typography */
-  --text-primary: #211B1A;
-  --text-secondary: #60433D;
-  --text-white: #E8D8CE;
-  --text-muted: #C1A094;
+:root, [data-palette="cupertino"] {
+  --bg-canvas: #000000;
+  --bg-surface: #161617;
+  --bg-surface-elevated: #242426;
+  --bg-surface-card: #1c1c1e;
+  --bg-nav: rgba(22, 22, 23, 0.82);
+  --bg-ribbon: #1d1d1f;
+  
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --text-muted: #86868b;
+  --text-on-accent: #ffffff;
+  
+  --border-subtle: #333336;
+  --border-medium: #48484a;
+  --border-strong: #636366;
+  
+  --accent-blue: #2997ff;
+  --btn-pill-bg: #0071e3;
+  --btn-pill-hover: #0077ed;
 }
 ```
 
-## 3. Typography
-- **Primary Stack**: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
-- **Numerals**: `font-variant-numeric: tabular-nums` for prices, discounts, ratings, item counts.
-- **Scale**:
-  - Headings: 1.15rem – 1.4rem (700 weight)
-  - Body: 14px – 16px (400 / 500 weight)
-  - Badges & Meta: 12px (700 weight, meets WCAG 11px floor)
+### Palette 3: Warm Espresso Bronze (`data-palette="3"`)
+- Deep bronze `#211B1A` canvas, `#382A28` elevated cards, `#60433D` borders, `#C1A094` primary actions, and `#E8D8CE` text.
 
-## 4. Elevation & Geometry
-- **Corners**: 4px radius on buttons & inputs (`--radius-sm`), 8px on product cards (`--radius-md`).
-- **Shadows**: Single declaration per surface:
-  - Default cards: 1px subtle border (`rgba(0, 0, 0, 0.08)`)
-  - Elevated hover: `0 8px 24px -4px rgba(33, 27, 26, 0.12)`
-  - Drawers / Modals: `0 10px 24px rgba(33, 27, 26, 0.18)`
+### Palette 1: Slate Steel Blue (`data-palette="1"`)
+- Midnight slate `#111522` canvas, `#1E263B` cards, `#303D59` borders, `#98A9C4` accents, and `#DCE3EF` high-contrast text.
 
-## 5. Browser Surfaces
-- `::selection`: `rgba(193, 160, 148, 0.35)` on `#211B1A`
-- `input, textarea, select`: `caret-color: #f08804`
-- `:focus-visible`: `2px solid #f08804`, outline offset 2px
-- `::-webkit-scrollbar`: 9px width, `#C1A094` thumb with `#eaeded` track
+### Palette 2: Obsidian Velvet (`data-palette="2"`)
+- Deep velvet `#17151C` canvas, `#292531` cards, `#45404F` insets, `#AAA2B3` actions, and `#E2DDE7` text.
+
+---
+
+## 3. Layout Hierarchy & Sections
+
+```
+┌────────────────────────────────────────────────────────┐
+│ Global Navigation (Frosted Glass, Links, Palette, Bag) │
+├────────────────────────────────────────────────────────┤
+│ Announcement Ribbon (EMI & Cashback Promotions)        │
+├────────────────────────────────────────────────────────┤
+│ Hero 1: iPhone Duo ("Hello, hello.")                   │
+├────────────────────────────────────────────────────────┤
+│ Hero 2: MacBook Pro ("PROLED XDR Display")             │
+├────────────────────────────────────────────────────────┤
+│ Hero 3: iPhone 18 Pro ("Pro further.")                 │
+├────────────────────────────────────────────────────────┤
+│ 2x3 Bento Showcase Grid                                │
+│ [Watch Series 12]  [iPad A16]                          │
+│ [AirPods Pro 3]    [MacBook Air M5]                    │
+│ [iPad mini]        [Apple Trade In]                    │
+├────────────────────────────────────────────────────────┤
+│ Entertainment Showcase (Apple TV+ Horizontal Carousel) │
+├────────────────────────────────────────────────────────┤
+│ Directory Footer (5 Columns + Disclaimers + Legal Bar) │
+└────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 4. Components & Micro-Interactions
+1. **Interactive Shopping Bag**:
+   - Slide-out drawer with backdrop blur.
+   - Dynamic real-time calculation of subtotal and 6-month No Cost EMI.
+   - Item quantity increment/decrement and removal with live badge updates.
+   - Persistent state in `localStorage`.
+2. **Apple TV+ Streaming Carousel**:
+   - Horizontal snap scrolling with prev/next buttons.
+   - Preview notifications for original titles (Pluribus, Severance, Monarch, etc.).
+3. **Pill Action Geometry**:
+   - Dual actions: Primary solid pill (`Buy`) and secondary ghost pill (`Learn more`).
+   - Smooth scale micro-transitions (`scale(1.02)` on hover).
