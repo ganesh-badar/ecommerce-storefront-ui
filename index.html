@@ -1,19 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" data-palette="cupertino">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO & Metadata -->
+    <title>Educational E-Commerce UI Demo | Frontend Portfolio Showcase</title>
     <meta
       name="description"
-      content="Apple (India) — Official Flagship Store & Product Showcase. Explore iPhone Duo, MacBook Pro PROLED XDR, iPhone 18 Pro, Apple Watch Series 12, iPad, AirPods Pro 3, and Apple TV+."
+      content="Educational E-Commerce UI layout clone built with HTML5, CSS3, and JavaScript by Ganesh Badar for portfolio skill demonstration. Not affiliated with Amazon."
     />
-    <title>Apple (India) — Official Store &amp; Flagship Product Showcase</title>
+    <meta name="keywords" content="Frontend Portfolio, HTML5, CSS3, JavaScript, Responsive Web Design, UI Clone, Educational Demo" />
+    <meta name="author" content="Ganesh Badar" />
+    
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Educational E-Commerce UI Demo | Ganesh Badar" />
+    <meta property="og:description" content="Responsive UI demo featuring dynamic search, cart system, and mobile drawer for portfolio review." />
+    <meta property="og:type" content="website" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="amazon_logo.png" />
 
-    <!-- FontAwesome for Cupertino Navigation & Icons -->
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
@@ -22,675 +42,598 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Accessibility Skip Link -->
+    <!-- Top Skip Link for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- GLOBAL NAVIGATION (Frosted Glass Cupertino Header) -->
-    <header class="global-nav" role="banner">
-      <div class="global-nav-inner">
-        <!-- Apple Brand Logo -->
-        <a href="#store" class="nav-brand-logo" aria-label="Apple Home">
-          <svg width="17" height="21" viewBox="0 0 170 170" fill="currentColor" aria-hidden="true">
-            <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.08-7.7-7.85-12.01-14.34-6.3-9.52-11.2-20.73-14.7-33.64-3.51-12.9-5.26-24.81-5.26-35.72 0-15.11 3.84-27.46 11.53-37.05 7.68-9.6 17.57-14.48 29.66-14.65 4.89 0 10.37 1.25 16.44 3.76 6.07 2.5 10.02 3.82 11.85 3.96 1.83-.14 5.92-1.54 12.27-4.19 6.35-2.65 11.66-3.83 15.93-3.53 11.96.88 21.6 5.34 28.91 13.38-10.45 6.32-15.57 15.12-15.35 26.4.24 9.17 3.84 16.89 10.8 23.16 6.96 6.27 15.14 9.68 24.53 10.23-2.61 8.21-6.01 16.65-10.2 25.32zM119.22 33.15c0-7.39 2.65-14.28 7.95-20.67 5.3-6.39 11.83-10.36 19.59-11.91.22 1.34.33 2.55.33 3.63 0 7.23-2.73 14.15-8.19 20.76-5.46 6.61-12.03 10.59-19.68 11.93z" />
-          </svg>
+    <!-- EDUCATIONAL DEMO DISCLAIMER BANNER (Prevents Safe Browsing / Phishing False Positives) -->
+    <div class="educational-banner" style="background: #1a222d; color: #ffd814; padding: 10px 18px; font-size: 13px; text-align: center; border-bottom: 2px solid #f08804; font-weight: 600; line-height: 1.4;">
+      <i class="fa-solid fa-triangle-exclamation" style="margin-right: 6px;"></i>
+      <strong>PORTFOLIO DEMO:</strong> This is an educational UI mockup created by Ganesh Badar for frontend skill demonstration. It is NOT affiliated with Amazon. No actual login, authentication, or payment transactions occur on this site.
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header role="banner">
+      <nav class="navbar" aria-label="Main Navigation">
+        <!-- Logo with DEMO tag -->
+        <a href="index.html" class="nav-logo border" aria-label="Demo E-Commerce Home">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <div class="logo" role="img" aria-label="Demo Logo"></div>
+            <span style="background: #febd69; color: #0f1111; font-size: 11px; font-weight: 800; padding: 2.5px 7px; border-radius: 4px; letter-spacing: 0.5px; text-transform: uppercase;">DEMO</span>
+          </div>
         </a>
 
-        <!-- Category Menu Links from Markdown -->
-        <nav class="nav-menu" aria-label="Main Navigation">
-          <ul class="nav-menu-list">
-            <li class="nav-menu-item"><a href="#store">Store</a></li>
-            <li class="nav-menu-item"><a href="#mac">Mac</a></li>
-            <li class="nav-menu-item"><a href="#ipad">iPad</a></li>
-            <li class="nav-menu-item"><a href="#iphone">iPhone</a></li>
-            <li class="nav-menu-item"><a href="#watch">Watch</a></li>
-            <li class="nav-menu-item"><a href="#airpods">AirPods</a></li>
-            <li class="nav-menu-item"><a href="#home">Home</a></li>
-            <li class="nav-menu-item"><a href="#entertainment">Entertainment</a></li>
-            <li class="nav-menu-item"><a href="#accessories">Accessories</a></li>
-            <li class="nav-menu-item"><a href="#support">Support</a></li>
-          </ul>
-        </nav>
-
-        <!-- Navigation Actions (Search, Bag, Multi-Palette Switcher) -->
-        <div class="nav-actions">
-          <!-- Multi-Palette Switcher Pill -->
-          <div class="palette-switcher" role="group" aria-label="Theme Color Ramp Switcher">
-            <button
-              type="button"
-              class="palette-btn active"
-              data-palette-target="cupertino"
-              title="Cupertino Titanium Dark"
-              style="background: #242426; border-color: #ffffff;"
-              aria-label="Cupertino Dark Theme"
-            ></button>
-            <button
-              type="button"
-              class="palette-btn"
-              data-palette-target="3"
-              title="Palette 3: Warm Espresso Bronze (#211B1A → #E8D8CE)"
-              style="background: #382A28;"
-              aria-label="Espresso Bronze Theme"
-            ></button>
-            <button
-              type="button"
-              class="palette-btn"
-              data-palette-target="1"
-              title="Palette 1: Slate Steel Blue (#111522 → #DCE3EF)"
-              style="background: #1E263B;"
-              aria-label="Slate Steel Theme"
-            ></button>
-            <button
-              type="button"
-              class="palette-btn"
-              data-palette-target="2"
-              title="Palette 2: Obsidian Velvet (#17151C → #E2DDE7)"
-              style="background: #292531;"
-              aria-label="Obsidian Velvet Theme"
-            ></button>
+        <!-- Deliver to Location -->
+        <button
+          type="button"
+          class="nav-address border"
+          id="locationBtn"
+          aria-label="Choose delivery location"
+        >
+          <p class="add-first">Deliver to</p>
+          <div class="address-icon">
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            <span class="add-second" id="currentLocation">India</span>
           </div>
+        </button>
 
-          <!-- Search Button -->
-          <button type="button" class="nav-icon-btn" id="navSearchBtn" aria-label="Search apple.com">
-            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <!-- Search Bar with Category Filter -->
+        <form class="nav-search" id="searchForm" role="search">
+          <label for="searchCategory" class="sr-only">Search Category</label>
+          <select class="search-select" id="searchCategory" aria-label="Select category">
+            <option value="all">All</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Home">Home & Kitchen</option>
+            <option value="Beauty">Beauty & Health</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Fitness">Fitness</option>
+            <option value="Toys">Toys & Games</option>
+          </select>
+          
+          <label for="searchInput" class="sr-only">Search Products</label>
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search demo catalog or filter categories..."
+            autocomplete="off"
+            aria-label="Search demo catalog"
+          />
+
+          <button
+            type="button"
+            class="clear-search-btn"
+            id="clearSearchBtn"
+            aria-label="Clear search"
+            style="display: none;"
+          >
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
           </button>
 
-          <!-- Shopping Bag Button -->
-          <button type="button" class="nav-icon-btn" id="navBagBtn" aria-label="Shopping Bag">
-            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
-            <span class="cart-badge tabular-num" id="bagBadge">0</span>
+          <button type="submit" class="search-icon" id="searchSubmitBtn" aria-label="Submit search">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          </button>
+        </form>
+
+        <!-- Language Selector -->
+        <div class="map-icon border dropdown-trigger" id="langSelector" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Language selector">
+          <i class="fa-solid fa-earth-americas" aria-hidden="true"></i>
+          <div class="lang-text">
+            <span class="lang-code" id="selectedLang">EN</span>
+            <i class="fa-solid fa-caret-down sort-down" aria-hidden="true"></i>
+          </div>
+          <!-- Language Dropdown -->
+          <ul class="dropdown-menu" id="langMenu" role="menu">
+            <li role="menuitem" data-lang="EN" class="active"><i class="fa-solid fa-check"></i> English - EN</li>
+            <li role="menuitem" data-lang="ES"><i class="fa-solid fa-check"></i> Español - ES</li>
+            <li role="menuitem" data-lang="HI"><i class="fa-solid fa-check"></i> हिन्दी - HI</li>
+            <li role="menuitem" data-lang="FR"><i class="fa-solid fa-check"></i> Français - FR</li>
+          </ul>
+        </div>
+
+        <!-- Account Demo -->
+        <a href="#demo-account" class="nav-signin border" id="accountBtn" aria-label="Demo Account Showcase">
+          <span class="nav-first">Hello, Guest</span>
+          <span class="nav-second">Demo Account <i class="fa-solid fa-caret-down" aria-hidden="true"></i></span>
+        </a>
+
+        <!-- Returns & Orders -->
+        <a href="#orders" class="nav-return border" id="ordersBtn" aria-label="Demo Orders">
+          <span class="nav-first">Demo</span>
+          <span class="nav-second">Orders</span>
+        </a>
+
+        <!-- Cart with Interactive Badge -->
+        <button
+          type="button"
+          class="nav-cart border"
+          id="cartBtn"
+          aria-label="Shopping Cart, 0 items"
+        >
+          <div class="cart-icon-container">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+            <span class="cart-badge" id="cartCount">0</span>
+          </div>
+          <span class="cart-label">Cart</span>
+        </button>
+      </nav>
+
+      <!-- SUB-NAVIGATION / SECONDARY BAR -->
+      <div class="panel">
+        <button type="button" class="panel-all border" id="openMenuBtn" aria-label="Open All Categories Menu">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+          <span>All</span>
+        </button>
+
+        <ul class="panel-options" role="menubar">
+          <li role="none"><a role="menuitem" href="#deals" class="panel-link">Today's Deals</a></li>
+          <li role="none"><a role="menuitem" href="#customer-service" class="panel-link">Customer Service</a></li>
+          <li role="none"><a role="menuitem" href="#registry" class="panel-link">Registry</a></li>
+          <li role="none"><a role="menuitem" href="#gift-cards" class="panel-link">Gift Cards</a></li>
+          <li role="none"><a role="menuitem" href="#sell" class="panel-link">Sell</a></li>
+        </ul>
+
+        <div class="panel-deals">
+          <a href="#electronics-deals" class="panel-link highlight-deal">Shop deals in Electronics</a>
+        </div>
+
+        <!-- Interactive Theme Palette Switcher -->
+        <div class="palette-switcher" role="group" aria-label="Theme Palette Selector">
+          <span class="palette-switcher-label"><i class="fa-solid fa-palette" aria-hidden="true"></i> Theme:</span>
+          <button type="button" class="palette-btn active" data-palette-target="3" title="Palette 3: Warm Espresso Bronze (#211B1A → #E8D8CE)">
+            <span class="palette-swatch" style="background: #382A28; border: 1px solid #C1A094;"></span> Espresso
+          </button>
+          <button type="button" class="palette-btn" data-palette-target="1" title="Palette 1: Slate Steel Blue (#111522 → #DCE3EF)">
+            <span class="palette-swatch" style="background: #1E263B; border: 1px solid #98A9C4;"></span> Slate
+          </button>
+          <button type="button" class="palette-btn" data-palette-target="2" title="Palette 2: Obsidian Velvet (#17151C → #E2DDE7)">
+            <span class="palette-swatch" style="background: #292531; border: 1px solid #AAA2B3;"></span> Velvet
           </button>
         </div>
       </div>
     </header>
 
-    <!-- PROMOTIONAL ANNOUNCEMENT RIBBON -->
-    <div class="ribbon-banner" role="region" aria-label="Promotional Offer">
-      <div class="ribbon-inner">
-        <span>Get up to 6 months of No Cost EMI plus up to ₹15000 instant cashback on selected products with eligible cards.‡</span>
-        <a href="#store" class="ribbon-link">Shop <i class="fa-solid fa-chevron-right" aria-hidden="true" style="font-size: 0.65rem;"></i></a>
+    <!-- SIDE NAVIGATION DRAWER (Amazon-style Sidebar) -->
+    <aside id="sideDrawer" class="side-drawer" aria-label="All Categories Menu" aria-hidden="true">
+      <div class="drawer-header">
+        <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
+        <span>Demo Guest Profile</span>
+        <button type="button" class="drawer-close-btn" id="closeMenuBtn" aria-label="Close Menu">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="drawer-content">
+        <div class="drawer-section">
+          <h3>Digital Content & Devices</h3>
+          <ul>
+            <li><a href="#amazon-music">Amazon Music <i class="fa-solid fa-chevron-right"></i></a></li>
+            <li><a href="#kindle">Kindle E-readers & Books <i class="fa-solid fa-chevron-right"></i></a></li>
+            <li><a href="#appstore">Amazon Appstore <i class="fa-solid fa-chevron-right"></i></a></li>
+          </ul>
+        </div>
+        <div class="drawer-section">
+          <h3>Shop by Department</h3>
+          <ul>
+            <li><a href="#electronics" data-category="Electronics">Electronics <i class="fa-solid fa-chevron-right"></i></a></li>
+            <li><a href="#home" data-category="Home">Home & Kitchen <i class="fa-solid fa-chevron-right"></i></a></li>
+            <li><a href="#beauty" data-category="Beauty">Beauty & Health <i class="fa-solid fa-chevron-right"></i></a></li>
+            <li><a href="#fashion" data-category="Fashion">Fashion & Apparel <i class="fa-solid fa-chevron-right"></i></a></li>
+            <li><a href="#fitness" data-category="Fitness">Sports & Fitness <i class="fa-solid fa-chevron-right"></i></a></li>
+          </ul>
+        </div>
+        <div class="drawer-section">
+          <h3>Programs & Features</h3>
+          <ul>
+            <li><a href="#gift-cards">Gift Cards</a></li>
+            <li><a href="#amazon-live">Amazon Live</a></li>
+            <li><a href="#international">International Shopping</a></li>
+          </ul>
+        </div>
+        <div class="drawer-section">
+          <h3>Help & Settings</h3>
+          <ul>
+            <li><a href="#account">Demo Account Settings</a></li>
+            <li><a href="#customer-service">Customer Support Demo</a></li>
+            <li><a href="#close" id="sideDrawerCloseLink">Close Menu</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+    <div id="drawerOverlay" class="drawer-overlay" tabindex="-1"></div>
+
+    <!-- CART SLIDE-OUT DRAWER -->
+    <aside id="cartDrawer" class="cart-drawer" aria-label="Shopping Cart Drawer" aria-hidden="true">
+      <div class="cart-drawer-header">
+        <h2><i class="fa-solid fa-cart-shopping"></i> Shopping Cart</h2>
+        <button type="button" class="cart-close-btn" id="closeCartBtn" aria-label="Close Cart">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="cart-drawer-body" id="cartDrawerItems">
+        <!-- Rendered dynamically via JavaScript -->
+        <div class="empty-cart-view">
+          <i class="fa-solid fa-basket-shopping empty-icon"></i>
+          <p>Your Amazon Cart is empty.</p>
+          <small>Check out items below and click "Add to Cart" to start shopping!</small>
+        </div>
+      </div>
+      <div class="cart-drawer-footer" id="cartDrawerFooter">
+        <div class="cart-subtotal">
+          <span>Subtotal (<span id="cartTotalItems">0</span> items):</span>
+          <strong id="cartTotalPrice">$0.00</strong>
+        </div>
+        <button type="button" class="btn-checkout" id="checkoutBtn">Proceed to Checkout</button>
+        <button type="button" class="btn-clear-cart" id="clearCartBtn">Clear Cart</button>
+      </div>
+    </aside>
+    <div id="cartOverlay" class="drawer-overlay" tabindex="-1"></div>
+
+    <!-- LOCATION MODAL -->
+    <div id="locationModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h3 id="modalTitle">Choose your delivery location</h3>
+          <button type="button" class="modal-close" id="closeLocationModal" aria-label="Close modal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-subtitle">Delivery options and delivery speeds may vary for different locations.</p>
+          <div class="form-group">
+            <label for="countrySelect">Select Country / Region:</label>
+            <select id="countrySelect" class="form-control">
+              <option value="India">India</option>
+              <option value="United States">United States</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Canada">Canada</option>
+              <option value="Germany">Germany</option>
+              <option value="Australia">Australia</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pincodeInput">Or enter a postal code:</label>
+            <div class="pincode-row">
+              <input type="text" id="pincodeInput" class="form-control" placeholder="e.g. 110001 or 90210" maxlength="10" />
+              <button type="button" class="btn-apply" id="applyPincodeBtn">Apply</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-save-location" id="saveLocationBtn">Done</button>
+        </div>
       </div>
     </div>
+    <div id="modalOverlay" class="drawer-overlay" tabindex="-1"></div>
 
-    <!-- MAIN PRODUCT SHOWCASE CONTENT -->
-    <main id="main-content">
-      <!-- ====================================================================
-           HERO 1: iPhone Duo ("Hello, hello.")
-           ==================================================================== -->
-      <section class="hero-showcase hero-dark" id="iphone-duo" aria-label="iPhone Duo Showcase">
-        <span class="hero-badge-eyebrow">New Flagship</span>
-        <h1 class="hero-title">iPhone Duo</h1>
-        <p class="hero-subtitle">Hello, hello.</p>
-        <div class="hero-cta-group">
-          <a href="#store" class="btn-pill btn-pill-primary btn-add-bag" data-id="iphone-duo" data-title="iPhone Duo" data-price="79900">
-            Buy
-          </a>
-          <a href="#store" class="btn-pill btn-pill-ghost">
-            Learn more <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;" aria-hidden="true"></i>
-          </a>
-        </div>
-        <div class="hero-figure">
-          <div class="hero-visual-card" role="img" aria-label="iPhone Duo Dual Lens Titanium Finish Showcase">
-            <div class="hero-device-preview">
-              <div class="device-pill-tag">Dynamic Island &bull; Titanium Enclosure</div>
-              <div class="device-spec-row">
-                <span class="spec-label">Pro Display</span>
-                <span class="spec-value tabular-num">120Hz ProMotion</span>
-              </div>
-              <div class="device-spec-row">
-                <span class="spec-label">Dual Fusion</span>
-                <span class="spec-value tabular-num">48MP + 24MP</span>
-              </div>
-            </div>
-          </div>
+    <!-- MAIN CONTENT -->
+    <main id="main-content" role="main">
+      <!-- HERO BANNER SECTION -->
+      <section class="hero-section" aria-label="Hero Promotion Banner">
+        <div class="hero-msg" role="region" aria-label="Educational Notice">
+          <p>
+            You are currently browsing an <strong>Educational E-Commerce UI Prototype</strong> designed by Ganesh Badar.
+            Demonstrating modern CSS Grid layouts, fluid responsiveness, and Vanilla JavaScript DOM interactivity.
+          </p>
         </div>
       </section>
 
-      <!-- ====================================================================
-           HERO 2: MacBook Pro ("PROLED XDR Display")
-           ==================================================================== -->
-      <section class="hero-showcase hero-spotlight" id="macbook-pro" aria-label="MacBook Pro Showcase">
-        <span class="hero-badge-eyebrow">Powerhouse</span>
-        <h2 class="hero-title">MacBook Pro</h2>
-        <p class="hero-subtitle">PROLED XDR Display</p>
-        <div class="hero-cta-group">
-          <a href="#store" class="btn-pill btn-pill-primary btn-add-bag" data-id="macbook-pro" data-title="MacBook Pro 16″" data-price="169900">
-            Buy
-          </a>
-          <a href="#mac" class="btn-pill btn-pill-ghost">
-            Learn more <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;" aria-hidden="true"></i>
-          </a>
-        </div>
-        <div class="hero-figure">
-          <div class="hero-visual-card">
-            <svg viewBox="0 0 500 240" width="460" height="220" aria-label="MacBook Pro Space Black Pro Display">
-              <rect x="80" y="25" width="340" height="175" rx="10" fill="#1e1e22" stroke="#48484a" stroke-width="2"/>
-              <rect x="88" y="33" width="324" height="159" rx="6" fill="#000000"/>
-              <!-- Screen Glow Graphic -->
-              <path d="M120 180 Q250 80 380 180 Z" fill="url(#screenGrad)" opacity="0.45"/>
-              <!-- Base -->
-              <path d="M50 200 L450 200 L430 216 L70 216 Z" fill="#2d2d32" stroke="#636366" stroke-width="1.5"/>
-              <rect x="220" y="202" width="60" height="4" rx="2" fill="#535359"/>
-              <defs>
-                <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#2997ff" />
-                  <stop offset="100%" stop-color="#bf5af2" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
+      <!-- FILTER STATUS BAR (Appears on Search / Filter) -->
+      <section class="filter-status-bar" id="filterStatusBar" style="display: none;">
+        <span id="filterStatusText">Showing all results</span>
+        <button type="button" id="resetFilterBtn" class="btn-reset-filter">
+          <i class="fa-solid fa-rotate-left"></i> Reset Filter
+        </button>
       </section>
 
-      <!-- ====================================================================
-           HERO 3: iPhone 18 Pro ("Pro further.")
-           ==================================================================== -->
-      <section class="hero-showcase hero-dark" id="iphone-18-pro" aria-label="iPhone 18 Pro Showcase">
-        <span class="hero-badge-eyebrow">Grade 5 Titanium</span>
-        <h2 class="hero-title">iPhone 18 Pro</h2>
-        <p class="hero-subtitle">Pro further.</p>
-        <div class="hero-cta-group">
-          <a href="#store" class="btn-pill btn-pill-primary btn-add-bag" data-id="iphone-18-pro" data-title="iPhone 18 Pro" data-price="134900">
-            Buy
-          </a>
-          <a href="#iphone" class="btn-pill btn-pill-ghost">
-            Learn more <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;" aria-hidden="true"></i>
-          </a>
-        </div>
-        <div class="hero-figure">
-          <div class="hero-visual-card">
-            <svg viewBox="0 0 380 240" width="340" height="220" aria-label="iPhone 18 Pro Triple Lens Camera Array">
-              <rect x="120" y="15" width="140" height="210" rx="26" fill="#1b1c20" stroke="#716879" stroke-width="2"/>
-              <rect x="126" y="21" width="128" height="198" rx="22" fill="#0d0e12"/>
-              <!-- Triple Pro Lens Island -->
-              <rect x="136" y="32" width="56" height="56" rx="14" fill="#24262c" stroke="#48484a"/>
-              <circle cx="152" cy="46" r="10" fill="#121316" stroke="#2997ff" stroke-width="1.5"/>
-              <circle cx="152" cy="74" r="10" fill="#121316" stroke="#2997ff" stroke-width="1.5"/>
-              <circle cx="178" cy="60" r="10" fill="#121316" stroke="#2997ff" stroke-width="1.5"/>
-            </svg>
+      <!-- CMS-DRIVEN PRODUCT SHOP SECTION -->
+      <section class="shop-section" id="shopSection" aria-label="Product Categories & Deals">
+        <!-- Rendered dynamically by app.js (CMS Hydration) with fallback markup -->
+
+        <!-- Card 1 -->
+        <article class="box" data-id="1" data-category="Home" data-title="Refresh your space">
+          <div class="box-content">
+            <span class="box-badge">Popular</span>
+            <h2>Refresh your space</h2>
+            <div class="box-img" style="background-image: url('box1_image.jpg')" role="img" aria-label="Refresh your space"></div>
+            <div class="box-meta">
+              <span class="box-price">$29.99</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.7 (1.2k)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="1">Add to Cart</button>
+              <a href="#see-more-1" class="see-more-link">See more</a>
+            </div>
           </div>
-        </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="box" data-id="2" data-category="Beauty" data-title="Health & Personal Care">
+          <div class="box-content">
+            <span class="box-badge">Essential</span>
+            <h2>Health & Personal Care</h2>
+            <div class="box-img" style="background-image: url('box2_image.jpg')" role="img" aria-label="Health and Personal Care"></div>
+            <div class="box-meta">
+              <span class="box-price">$18.50</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.6 (950)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="2">Add to Cart</button>
+              <a href="#see-more-2" class="see-more-link">See more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="box" data-id="3" data-category="Home" data-title="Give your home a makeover">
+          <div class="box-content">
+            <span class="box-badge">Trending</span>
+            <h2>Give your home a makeover</h2>
+            <div class="box-img" style="background-image: url('box3_image.jpg')" role="img" aria-label="Give your home a makeover"></div>
+            <div class="box-meta">
+              <span class="box-price">$45.00</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.8 (2.4k)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="3">Add to Cart</button>
+              <a href="#see-more-3" class="see-more-link">See more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="box" data-id="4" data-category="Electronics" data-title="Electronics & Devices">
+          <div class="box-content">
+            <span class="box-badge">Top Deal</span>
+            <h2>Electronics & Devices</h2>
+            <div class="box-img" style="background-image: url('box4_image.jpg')" role="img" aria-label="Electronics and Devices"></div>
+            <div class="box-meta">
+              <span class="box-price">$89.99</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.9 (4.1k)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="4">Add to Cart</button>
+              <a href="#see-more-4" class="see-more-link">See more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="box" data-id="5" data-category="Beauty" data-title="Beauty Picks">
+          <div class="box-content">
+            <span class="box-badge">Featured</span>
+            <h2>Beauty Picks</h2>
+            <div class="box-img" style="background-image: url('box5_image.jpg')" role="img" aria-label="Beauty Picks"></div>
+            <div class="box-meta">
+              <span class="box-price">$24.99</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.5 (820)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="5">Add to Cart</button>
+              <a href="#see-more-5" class="see-more-link">See more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="box" data-id="6" data-category="Home" data-title="Shop Pet supplies">
+          <div class="box-content">
+            <span class="box-badge">Best Value</span>
+            <h2>Shop Pet supplies</h2>
+            <div class="box-img" style="background-image: url('box6_image.jpg')" role="img" aria-label="Shop Pet supplies"></div>
+            <div class="box-meta">
+              <span class="box-price">$15.99</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.7 (1.5k)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="6">Add to Cart</button>
+              <a href="#see-more-6" class="see-more-link">See more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 7 -->
+        <article class="box" data-id="7" data-category="Toys" data-title="New arrivals in Toys">
+          <div class="box-content">
+            <span class="box-badge">New</span>
+            <h2>New arrivals in Toys</h2>
+            <div class="box-img" style="background-image: url('box7_image.jpg')" role="img" aria-label="New arrivals in Toys"></div>
+            <div class="box-meta">
+              <span class="box-price">$19.99</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.8 (670)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="7">Add to Cart</button>
+              <a href="#see-more-7" class="see-more-link">See more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 8 -->
+        <article class="box" data-id="8" data-category="Fashion" data-title="Discover fashion trends">
+          <div class="box-content">
+            <span class="box-badge">Hot</span>
+            <h2>Discover fashion trends</h2>
+            <div class="box-img" style="background-image: url('box8_image.jpg')" role="img" aria-label="Discover fashion trends"></div>
+            <div class="box-meta">
+              <span class="box-price">$39.00</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.4 (3.1k)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="8">Add to Cart</button>
+              <a href="#see-more-8" class="see-more-link">See more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 9 -->
+        <article class="box" data-id="9" data-category="Fitness" data-title="For your Fitness Needs">
+          <div class="box-content">
+            <span class="box-badge">Trending</span>
+            <h2>For your Fitness Needs</h2>
+            <div class="box-img" style="background-image: url('box9_image.jpg')" role="img" aria-label="For your Fitness Needs"></div>
+            <div class="box-meta">
+              <span class="box-price">$34.50</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.7 (890)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="9">Add to Cart</button>
+              <a href="#see-more-9" class="see-more-link">See more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 10 -->
+        <article class="box" data-id="10" data-category="Electronics" data-title="Activity Trackers & Smartwatches">
+          <div class="box-content">
+            <span class="box-badge">Smart Tech</span>
+            <h2>Activity Trackers & Smartwatches</h2>
+            <div class="box-img" style="background-image: url('box10_image.jpg')" role="img" aria-label="Activity trackers and smartwatches"></div>
+            <div class="box-meta">
+              <span class="box-price">$79.99</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.8 (5.2k)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="10">Add to Cart</button>
+              <a href="#see-more-10" class="see-more-link">See more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 11 -->
+        <article class="box" data-id="11" data-category="Home" data-title="Home & Kitchen Under $30">
+          <div class="box-content">
+            <span class="box-badge">Under $30</span>
+            <h2>Home & Kitchen Under $30</h2>
+            <div class="box-img" style="background-image: url('box11_image.jpg')" role="img" aria-label="Home and Kitchen under 30 dollars"></div>
+            <div class="box-meta">
+              <span class="box-price">$22.95</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.6 (1.8k)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="11">Add to Cart</button>
+              <a href="#see-more-11" class="see-more-link">See more</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 12 -->
+        <article class="box" data-id="12" data-category="Electronics" data-title="Shop Laptops & Tablets">
+          <div class="box-content">
+            <span class="box-badge">Premium</span>
+            <h2>Shop Laptops & Tablets</h2>
+            <div class="box-img" style="background-image: url('box12_image.jpg')" role="img" aria-label="Shop Laptops and Tablets"></div>
+            <div class="box-meta">
+              <span class="box-price">$499.00</span>
+              <span class="box-rating"><i class="fa-solid fa-star"></i> 4.9 (6.3k)</span>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn-add-cart" data-id="12">Add to Cart</button>
+              <a href="#see-more-12" class="see-more-link">See more</a>
+            </div>
+          </div>
+        </article>
       </section>
 
-      <!-- ====================================================================
-           2x3 BENTO SHOWCASE GRID (From Reference Markdown)
-           ==================================================================== -->
-      <section class="bento-section" aria-label="Bento Product Showcase">
-        <div class="bento-grid">
-          <!-- BENTO 1: Apple Watch Series 12 -->
-          <article class="bento-card" id="watch">
-            <span class="bento-badge-eyebrow">Smart Wearable</span>
-            <h3 class="bento-title">Apple Watch Series 12</h3>
-            <p class="bento-subtitle">The most accurate heart rate sensing in a wearable.1</p>
-            <div class="bento-cta-group">
-              <button type="button" class="btn-pill btn-pill-primary btn-add-bag" data-id="watch-s12" data-title="Apple Watch Series 12" data-price="46900">
-                Buy
-              </button>
-              <a href="#watch" class="btn-pill btn-pill-ghost">
-                Learn more <i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;" aria-hidden="true"></i>
-              </a>
-            </div>
-            <div class="bento-figure">
-              <svg viewBox="0 0 200 160" width="160" height="140" aria-label="Apple Watch Series 12 Titanium">
-                <rect x="55" y="30" width="90" height="105" rx="22" fill="#1f2024" stroke="#636366" stroke-width="2"/>
-                <rect x="63" y="38" width="74" height="89" rx="16" fill="#000000"/>
-                <circle cx="100" cy="82" r="28" fill="none" stroke="#ff375f" stroke-width="4" stroke-dasharray="120 40"/>
-                <path d="M145 65 L155 65 L155 85 L145 85 Z" fill="#8e8e93" rx="2"/>
-              </svg>
-            </div>
-          </article>
-
-          <!-- BENTO 2: iPad (A16 Chip) -->
-          <article class="bento-card" id="ipad">
-            <span class="bento-badge-eyebrow">Versatile Tablet</span>
-            <h3 class="bento-title">iPad</h3>
-            <p class="bento-subtitle">Now with the speed of the A16 chip and double the starting storage.</p>
-            <div class="bento-cta-group">
-              <button type="button" class="btn-pill btn-pill-primary btn-add-bag" data-id="ipad-a16" data-title="iPad (A16)" data-price="34900">
-                Buy
-              </button>
-              <a href="#ipad" class="btn-pill btn-pill-ghost">
-                Learn more <i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;" aria-hidden="true"></i>
-              </a>
-            </div>
-            <div class="bento-figure">
-              <svg viewBox="0 0 200 160" width="170" height="140" aria-label="iPad Liquid Retina Display">
-                <rect x="35" y="15" width="130" height="135" rx="14" fill="#28292d" stroke="#636366" stroke-width="2"/>
-                <rect x="41" y="21" width="118" height="123" rx="10" fill="#121316"/>
-                <circle cx="100" cy="80" r="30" fill="none" stroke="#2997ff" stroke-width="3" opacity="0.6"/>
-              </svg>
-            </div>
-          </article>
-
-          <!-- BENTO 3: AirPods Pro 3 -->
-          <article class="bento-card" id="airpods">
-            <span class="bento-badge-eyebrow">Acoustic Precision</span>
-            <h3 class="bento-title">AirPods Pro 3</h3>
-            <p class="bento-subtitle">The world’s best in-ear Active Noise Cancellation.</p>
-            <div class="bento-cta-group">
-              <button type="button" class="btn-pill btn-pill-primary btn-add-bag" data-id="airpods-pro-3" data-title="AirPods Pro 3" data-price="24900">
-                Buy
-              </button>
-              <a href="#airpods" class="btn-pill btn-pill-ghost">
-                Learn more <i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;" aria-hidden="true"></i>
-              </a>
-            </div>
-            <div class="bento-figure">
-              <svg viewBox="0 0 200 160" width="160" height="140" aria-label="AirPods Pro 3 Wireless Case & Earbuds">
-                <rect x="45" y="45" width="110" height="75" rx="28" fill="#e8e8ed" stroke="#a1a1a6" stroke-width="1.5"/>
-                <path d="M45 70 L155 70" stroke="#c7c7cc" stroke-width="1"/>
-                <circle cx="100" cy="88" r="3" fill="#30d158"/>
-              </svg>
-            </div>
-          </article>
-
-          <!-- BENTO 4: MacBook Air (M5) -->
-          <article class="bento-card" id="mac">
-            <span class="bento-badge-eyebrow">Ultra-Lightweight</span>
-            <h3 class="bento-title">MacBook Air</h3>
-            <p class="bento-subtitle">Now supercharged by M5.</p>
-            <div class="bento-cta-group">
-              <button type="button" class="btn-pill btn-pill-primary btn-add-bag" data-id="macbook-air-m5" data-title="MacBook Air M5" data-price="114900">
-                Buy
-              </button>
-              <a href="#mac" class="btn-pill btn-pill-ghost">
-                Learn more <i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;" aria-hidden="true"></i>
-              </a>
-            </div>
-            <div class="bento-figure">
-              <svg viewBox="0 0 240 160" width="200" height="140" aria-label="MacBook Air M5 Sleek Design">
-                <rect x="40" y="30" width="160" height="95" rx="6" fill="#1b1c20" stroke="#636366" stroke-width="1.5"/>
-                <rect x="46" y="36" width="148" height="83" rx="4" fill="#000000"/>
-                <path d="M25 125 L215 125 L205 133 L35 133 Z" fill="#2d2d32"/>
-              </svg>
-            </div>
-          </article>
-
-          <!-- BENTO 5: iPad mini -->
-          <article class="bento-card">
-            <span class="bento-badge-eyebrow">Compact Power</span>
-            <h3 class="bento-title">iPad mini</h3>
-            <p class="bento-subtitle">More than a little awesome.</p>
-            <div class="bento-cta-group">
-              <button type="button" class="btn-pill btn-pill-primary btn-add-bag" data-id="ipad-mini" data-title="iPad mini" data-price="49900">
-                Buy
-              </button>
-              <a href="#ipad" class="btn-pill btn-pill-ghost">
-                Learn more <i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;" aria-hidden="true"></i>
-              </a>
-            </div>
-            <div class="bento-figure">
-              <svg viewBox="0 0 180 160" width="150" height="140" aria-label="iPad mini Purple Finish">
-                <rect x="40" y="20" width="100" height="125" rx="14" fill="#322d3b" stroke="#716879" stroke-width="2"/>
-                <rect x="46" y="26" width="88" height="113" rx="10" fill="#16141a"/>
-                <circle cx="90" cy="80" r="22" fill="none" stroke="#bf5af2" stroke-width="2.5" opacity="0.7"/>
-              </svg>
-            </div>
-          </article>
-
-          <!-- BENTO 6: Apple Trade In -->
-          <article class="bento-card">
-            <span class="bento-badge-eyebrow">Environmental Value</span>
-            <h3 class="bento-title">Apple Trade In</h3>
-            <p class="bento-subtitle">Upgrade and save. It’s that easy.</p>
-            <div class="bento-cta-group">
-              <button type="button" class="btn-pill btn-pill-primary" id="tradeInBtn">
-                Get your estimate
-              </button>
-            </div>
-            <div class="bento-figure">
-              <svg viewBox="0 0 180 160" width="150" height="140" aria-label="Apple Trade In Recycle Arrows">
-                <circle cx="90" cy="80" r="45" fill="none" stroke="#30d158" stroke-width="4" stroke-dasharray="80 15"/>
-                <path d="M120 70 L135 80 L120 90 Z" fill="#30d158"/>
-                <path d="M60 90 L45 80 L60 70 Z" fill="#30d158"/>
-              </svg>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- ====================================================================
-           7. ENTERTAINMENT & APPLE TV+ STREAMING CAROUSEL (From Reference .md)
-           ==================================================================== -->
-      <section class="entertainment-section" id="entertainment" aria-label="Apple TV+ Streaming Originals">
-        <div class="section-header-wrap">
-          <h2 class="section-title">
-            <i class="fa-brands fa-apple" aria-hidden="true"></i> TV+ Originals
-          </h2>
-          <div class="carousel-controls">
-            <button type="button" class="carousel-btn" id="streamPrevBtn" aria-label="Previous Shows">
-              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-            </button>
-            <button type="button" class="carousel-btn" id="streamNextBtn" aria-label="Next Shows">
-              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="carousel-track" id="streamCarouselTrack" role="region" aria-label="Shows Carousel">
-          <!-- Card 1: Pluribus -->
-          <article class="stream-card">
-            <div class="stream-gradient-overlay"></div>
-            <div class="stream-card-content">
-              <span class="stream-genre-badge">Drama</span>
-              <h3 class="stream-card-title">Pluribus</h3>
-              <p class="stream-card-desc">Happiness is a state of mind.</p>
-              <button type="button" class="btn-stream" data-show="Pluribus">
-                <i class="fa-solid fa-play" aria-hidden="true"></i> Stream now
-              </button>
-            </div>
-          </article>
-
-          <!-- Card 2: Monarch: Legacy of Monsters -->
-          <article class="stream-card">
-            <div class="stream-gradient-overlay"></div>
-            <div class="stream-card-content">
-              <span class="stream-genre-badge">Adventure</span>
-              <h3 class="stream-card-title">Monarch: Legacy of Monsters</h3>
-              <p class="stream-card-desc">A new threat will surface.</p>
-              <button type="button" class="btn-stream" data-show="Monarch: Legacy of Monsters">
-                <i class="fa-solid fa-play" aria-hidden="true"></i> Stream now
-              </button>
-            </div>
-          </article>
-
-          <!-- Card 3: The Studio -->
-          <article class="stream-card">
-            <div class="stream-gradient-overlay"></div>
-            <div class="stream-card-content">
-              <span class="stream-genre-badge">Comedy</span>
-              <h3 class="stream-card-title">The Studio</h3>
-              <p class="stream-card-desc">Winner of 13 Emmy® Awards</p>
-              <button type="button" class="btn-stream" data-show="The Studio">
-                <i class="fa-solid fa-play" aria-hidden="true"></i> Stream now
-              </button>
-            </div>
-          </article>
-
-          <!-- Card 4: Severance -->
-          <article class="stream-card">
-            <div class="stream-gradient-overlay"></div>
-            <div class="stream-card-content">
-              <span class="stream-genre-badge">Thriller</span>
-              <h3 class="stream-card-title">Severance</h3>
-              <p class="stream-card-desc">Winner of 8 Emmy® Awards</p>
-              <button type="button" class="btn-stream" data-show="Severance">
-                <i class="fa-solid fa-play" aria-hidden="true"></i> Stream now
-              </button>
-            </div>
-          </article>
-
-          <!-- Card 5: Hijack -->
-          <article class="stream-card">
-            <div class="stream-gradient-overlay"></div>
-            <div class="stream-card-content">
-              <span class="stream-genre-badge">Thriller</span>
-              <h3 class="stream-card-title">Hijack</h3>
-              <p class="stream-card-desc">Who can you trust when it's all on the line?</p>
-              <button type="button" class="btn-stream" data-show="Hijack">
-                <i class="fa-solid fa-play" aria-hidden="true"></i> Stream now
-              </button>
-            </div>
-          </article>
-
-          <!-- Card 6: F1 The Movie -->
-          <article class="stream-card">
-            <div class="stream-gradient-overlay"></div>
-            <div class="stream-card-content">
-              <span class="stream-genre-badge">Action</span>
-              <h3 class="stream-card-title">F1 The Movie</h3>
-              <p class="stream-card-desc">Let’s ride.</p>
-              <button type="button" class="btn-stream" data-show="F1 The Movie">
-                <i class="fa-solid fa-play" aria-hidden="true"></i> Stream now
-              </button>
-            </div>
-          </article>
-
-          <!-- Card 7: Slow Horses -->
-          <article class="stream-card">
-            <div class="stream-gradient-overlay"></div>
-            <div class="stream-card-content">
-              <span class="stream-genre-badge">Thriller</span>
-              <h3 class="stream-card-title">Slow Horses</h3>
-              <p class="stream-card-desc">Emmy® Award Winner</p>
-              <button type="button" class="btn-stream" data-show="Slow Horses">
-                <i class="fa-solid fa-play" aria-hidden="true"></i> Stream now
-              </button>
-            </div>
-          </article>
-
-          <!-- Card 8: The Morning Show -->
-          <article class="stream-card">
-            <div class="stream-gradient-overlay"></div>
-            <div class="stream-card-content">
-              <span class="stream-genre-badge">Drama</span>
-              <h3 class="stream-card-title">The Morning Show</h3>
-              <p class="stream-card-desc">The truth is the top story.</p>
-              <button type="button" class="btn-stream" data-show="The Morning Show">
-                <i class="fa-solid fa-play" aria-hidden="true"></i> Stream now
-              </button>
-            </div>
-          </article>
-
-          <!-- Card 9: Shrinking -->
-          <article class="stream-card">
-            <div class="stream-gradient-overlay"></div>
-            <div class="stream-card-content">
-              <span class="stream-genre-badge">Comedy</span>
-              <h3 class="stream-card-title">Shrinking</h3>
-              <p class="stream-card-desc">Getting it together. Together.</p>
-              <button type="button" class="btn-stream" data-show="Shrinking">
-                <i class="fa-solid fa-play" aria-hidden="true"></i> Stream now
-              </button>
-            </div>
-          </article>
-        </div>
+      <!-- EMPTY SEARCH STATE (Hidden by default) -->
+      <section class="no-results-view" id="noResultsView" style="display: none;">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <h3>No matching products found</h3>
+        <p>Try checking your spelling or using more general search terms.</p>
+        <button type="button" class="btn-reset-filter" id="noResultsResetBtn">Show All Products</button>
       </section>
     </main>
 
-    <!-- ====================================================================
-         8. SLIDE-OUT SHOPPING BAG / CART DRAWER
-         ==================================================================== -->
-    <div class="cart-drawer-overlay" id="cartDrawerOverlay" aria-hidden="true">
-      <aside class="cart-drawer" role="dialog" aria-labelledby="cartDrawerHeading">
-        <header class="cart-drawer-header">
-          <h2 class="cart-drawer-title" id="cartDrawerHeading">Your Bag</h2>
-          <button type="button" class="cart-close-btn" id="cartCloseBtn" aria-label="Close Shopping Bag">
-            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-          </button>
-        </header>
+    <!-- FOOTER -->
+    <footer role="contentinfo">
+      <!-- Back to Top Button -->
+      <button type="button" class="foot-panel1" id="backToTopBtn" aria-label="Back to top of page">
+        Back to Top <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+      </button>
 
-        <div class="cart-drawer-body" id="cartItemsContainer">
-          <p class="cart-empty-message">Your bag is currently empty.</p>
+      <!-- Navigation Links Grid -->
+      <div class="foot-panel2">
+        <div class="foot-column">
+          <h3>Get to Know Us</h3>
+          <ul>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#about">About Amazon</a></li>
+            <li><a href="#investors">Investor Relations</a></li>
+            <li><a href="#devices">Amazon Devices</a></li>
+            <li><a href="#science">Amazon Science</a></li>
+          </ul>
         </div>
 
-        <footer class="cart-drawer-footer">
-          <div class="cart-subtotal-row">
-            <span>Total:</span>
-            <span class="tabular-num" id="cartSubtotal">₹0</span>
-          </div>
-          <p class="cart-emi-note tabular-num" id="cartEmiNote">
-            Or ₹0/mo with 6 months No Cost EMI.‡
-          </p>
-          <button type="button" class="btn-checkout" id="checkoutBtn">
-            Check Out
-          </button>
-        </footer>
-      </aside>
-    </div>
-
-    <!-- ====================================================================
-         9. STRUCTURED DIRECTORY FOOTER & DISCLAIMERS (From Reference .md)
-         ==================================================================== -->
-    <footer class="global-footer" role="contentinfo">
-      <div class="footer-inner">
-        <!-- Disclaimers & Footnotes -->
-        <section class="footer-disclaimers" aria-label="Footnotes">
+        <div class="foot-column">
+          <h3>Make Money with Us</h3>
           <ul>
-            <li>‡ Includes instant cashback and No Cost EMI.</li>
-            <li>
-              No Cost EMI is available with the purchase of an eligible product made using qualifying cards on 3- or 6-month tenures from most leading card issuers. Monthly pricing is rounded to the nearest rupee. Exact pricing will be provided by your card issuer, subject to your card issuer’s terms and conditions. Minimum order spend applies as per your card issuer’s threshold. No Cost EMI is not available to business customers.
-            </li>
-            <li>
-              Instant cashback is available with the purchase of an eligible product with qualifying American Express, Axis Bank and ICICI Bank cards only. Minimum transaction value of ₹10001 applies. Instant cashback is available for up to two orders per rolling 90-day period with an eligible card.
-            </li>
-            <li>
-              1. Based on data from an Apple-conducted study of heart rate accuracy, during July and August 2026, utilising commercially available best-selling wearables available as of June 2026.
-            </li>
-            <li>A subscription is required for Apple TV+.</li>
-            <li>Features are subject to change. Some features, applications and services may not be available in all regions or all languages.</li>
+            <li><a href="#sell">Sell products on Amazon</a></li>
+            <li><a href="#business">Sell on Amazon Business</a></li>
+            <li><a href="#apps">Sell apps on Amazon</a></li>
+            <li><a href="#affiliate">Become an Affiliate</a></li>
+            <li><a href="#advertise">Advertise Your Products</a></li>
+            <li><a href="#self-publish">Self-Publish with Us</a></li>
+            <li><a href="#hub">Host an Amazon Hub</a></li>
           </ul>
-        </section>
+        </div>
 
-        <!-- 5-Column Directory Navigation -->
-        <nav class="footer-directory" aria-label="Directory Navigation">
-          <!-- Column 1 -->
-          <div class="directory-column">
-            <div class="directory-column-section">
-              <h3 class="directory-heading">Shop and Learn</h3>
-              <ul class="directory-list">
-                <li><a href="#store">Store</a></li>
-                <li><a href="#mac">Mac</a></li>
-                <li><a href="#ipad">iPad</a></li>
-                <li><a href="#iphone">iPhone</a></li>
-                <li><a href="#watch">Watch</a></li>
-                <li><a href="#airpods">AirPods</a></li>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#accessories">AirTag</a></li>
-                <li><a href="#accessories">Accessories</a></li>
-                <li><a href="#store">Gift Cards</a></li>
-              </ul>
-            </div>
-            <div class="directory-column-section">
-              <h3 class="directory-heading">Apple Wallet</h3>
-              <ul class="directory-list">
-                <li><a href="#wallet">Wallet</a></li>
-                <li><a href="#pay">Apple Pay</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Column 2 -->
-          <div class="directory-column">
-            <div class="directory-column-section">
-              <h3 class="directory-heading">Account</h3>
-              <ul class="directory-list">
-                <li><a href="#account">Manage Your Apple Account</a></li>
-                <li><a href="#account">Apple Store Account</a></li>
-                <li><a href="#icloud">iCloud.com</a></li>
-              </ul>
-            </div>
-            <div class="directory-column-section">
-              <h3 class="directory-heading">Entertainment</h3>
-              <ul class="directory-list">
-                <li><a href="#entertainment">Apple TV+</a></li>
-                <li><a href="#music">Apple Music</a></li>
-                <li><a href="#arcade">Apple Arcade</a></li>
-                <li><a href="#fitness">Apple Fitness+</a></li>
-                <li><a href="#podcasts">Apple Podcasts</a></li>
-                <li><a href="#books">Apple Books</a></li>
-                <li><a href="#appstore">App Store</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Column 3 -->
-          <div class="directory-column">
-            <div class="directory-column-section">
-              <h3 class="directory-heading">Apple Store</h3>
-              <ul class="directory-list">
-                <li><a href="#retail">Find a Store</a></li>
-                <li><a href="#genius">Genius Bar</a></li>
-                <li><a href="#today">Today at Apple</a></li>
-                <li><a href="#groups">Group Reservations</a></li>
-                <li><a href="#camp">Apple Camp</a></li>
-                <li><a href="#tradein">Apple Trade In</a></li>
-                <li><a href="#ways">Ways to Buy</a></li>
-                <li><a href="#recycling">Recycling Programme</a></li>
-                <li><a href="#orderstatus">Order Status</a></li>
-                <li><a href="#shoppinghelp">Shopping Help</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Column 4 -->
-          <div class="directory-column">
-            <div class="directory-column-section">
-              <h3 class="directory-heading">For Business</h3>
-              <ul class="directory-list">
-                <li><a href="#business">Apple and Business</a></li>
-                <li><a href="#business">Shop for Business</a></li>
-              </ul>
-            </div>
-            <div class="directory-column-section">
-              <h3 class="directory-heading">For Education</h3>
-              <ul class="directory-list">
-                <li><a href="#education">Apple and Education</a></li>
-                <li><a href="#education">Shop for Education</a></li>
-                <li><a href="#education">Shop for University</a></li>
-              </ul>
-            </div>
-            <div class="directory-column-section">
-              <h3 class="directory-heading">For Healthcare</h3>
-              <ul class="directory-list">
-                <li><a href="#healthcare">Apple and Healthcare</a></li>
-              </ul>
-            </div>
-            <div class="directory-column-section">
-              <h3 class="directory-heading">For Government</h3>
-              <ul class="directory-list">
-                <li><a href="#government">Apple and Government</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Column 5 -->
-          <div class="directory-column">
-            <div class="directory-column-section">
-              <h3 class="directory-heading">Apple Values</h3>
-              <ul class="directory-list">
-                <li><a href="#accessibility">Accessibility</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#environment">Environment</a></li>
-                <li><a href="#privacy">Privacy</a></li>
-                <li><a href="#supplychain">Supply Chain Innovation</a></li>
-              </ul>
-            </div>
-            <div class="directory-column-section">
-              <h3 class="directory-heading">About Apple</h3>
-              <ul class="directory-list">
-                <li><a href="#newsroom">Newsroom</a></li>
-                <li><a href="#leadership">Apple Leadership</a></li>
-                <li><a href="#careers">Career Opportunities</a></li>
-                <li><a href="#investors">Investors</a></li>
-                <li><a href="#compliance">Ethics &amp; Compliance</a></li>
-                <li><a href="#events">Events</a></li>
-                <li><a href="#contact">Contact Apple</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-        <!-- Legal Bar -->
-        <div class="footer-legal-bar">
-          <p>Copyright &copy; 2026 Apple Inc. All rights reserved.</p>
-          <ul class="footer-legal-links">
-            <li><a href="#privacy">Privacy Policy</a></li>
-            <li><a href="#terms">Terms of Use</a></li>
-            <li><a href="#sales">Sales Policy</a></li>
-            <li><a href="#legal">Legal</a></li>
-            <li><a href="#sitemap">Site Map</a></li>
+        <div class="foot-column">
+          <h3>Amazon Payment Products</h3>
+          <ul>
+            <li><a href="#business-card">Amazon Business Card</a></li>
+            <li><a href="#points">Shop with Points</a></li>
+            <li><a href="#reload">Reload Your Balance</a></li>
+            <li><a href="#currency">Amazon Currency Converter</a></li>
           </ul>
-          <a href="#country" class="footer-country-picker" aria-label="Choose Country or Region">
-            <i class="fa-solid fa-globe" aria-hidden="true"></i> India (English)
-          </a>
+        </div>
+
+        <div class="foot-column">
+          <h3>Let Us Help You</h3>
+          <ul>
+            <li><a href="#covid">Amazon and COVID-19</a></li>
+            <li><a href="#account">Your Account</a></li>
+            <li><a href="#orders">Your Orders</a></li>
+            <li><a href="#shipping">Shipping Rates & Policies</a></li>
+            <li><a href="#returns">Returns & Replacements</a></li>
+            <li><a href="#devices-manage">Manage Content & Devices</a></li>
+            <li><a href="#help">Help Center</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Brand Logo & Settings -->
+      <div class="foot-panel3">
+        <div class="logo" role="img" aria-label="Amazon Logo"></div>
+        <div class="foot-selectors">
+          <button type="button" class="foot-btn" id="footLangBtn">
+            <i class="fa-solid fa-globe"></i> English
+          </button>
+          <button type="button" class="foot-btn" id="footCurrencyBtn">
+            $ USD - U.S. Dollar
+          </button>
+          <button type="button" class="foot-btn" id="footCountryBtn">
+            <i class="fa-solid fa-flag-usa"></i> United States
+          </button>
+        </div>
+      </div>
+
+      <!-- Legal Links & Copyright -->
+      <div class="foot-panel4">
+        <div class="pages">
+          <a href="#conditions">Conditions of Use</a>
+          <a href="#privacy">Privacy Notice</a>
+          <a href="#ads">Consumer Health Data Privacy</a>
+          <a href="#choices">Your Ads Privacy Choices</a>
+        </div>
+        <div class="copyright">
+          &copy; 2026 Educational Frontend UI Portfolio Project by Ganesh Badar &bull; Purely for technical demonstration &bull; Not affiliated with Amazon.com, Inc.
         </div>
       </div>
     </footer>
 
-    <!-- Interactive Toast Notification -->
-    <div class="toast-notice" id="toastNotice" role="status" aria-live="polite"></div>
-
-    <!-- Application Script -->
+    <!-- Vanilla JavaScript Logic -->
     <script src="app.js"></script>
   </body>
 </html>

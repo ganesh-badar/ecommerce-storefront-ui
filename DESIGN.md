@@ -1,87 +1,73 @@
-# Design System — Apple Flagship Store & UI Showcase
+# Design System — Amazon Clone UI (Educational Showcase)
 
-## 1. Product Truth & Design Philosophy
-- **Product Truth**: High-fidelity recreation of the Apple Flagship Store and Cupertino product showcase based on the official specification and layout hierarchy.
-- **Visual Language**: Minimalist Cupertino typography, frosted glass sticky navigation, full-bleed cinematic hero showcases, modular 2x3 bento product grid, horizontal media streaming carousel (Apple TV+), and structured 5-column directory footer.
-- **Craft Floor Rules**: Zero gradient text, high contrast (WCAG AA compliant: ≥4.5:1), tabular numerals on all prices and numerical specs, smooth micro-interactions, zero layout shifting.
-
----
-
-## 2. Color Palette & Token Architecture
-The design system supports 4 architectural color ramps, selectable directly from the navigation bar:
-
-### Signature Theme: Cupertino Titanium Dark (`data-palette="cupertino"`)
-```css
-:root, [data-palette="cupertino"] {
-  --bg-canvas: #000000;
-  --bg-surface: #161617;
-  --bg-surface-elevated: #242426;
-  --bg-surface-card: #1c1c1e;
-  --bg-nav: rgba(22, 22, 23, 0.82);
-  --bg-ribbon: #1d1d1f;
-  
-  --text-primary: #f5f5f7;
-  --text-secondary: #a1a1a6;
-  --text-muted: #86868b;
-  --text-on-accent: #ffffff;
-  
-  --border-subtle: #333336;
-  --border-medium: #48484a;
-  --border-strong: #636366;
-  
-  --accent-blue: #2997ff;
-  --btn-pill-bg: #0071e3;
-  --btn-pill-hover: #0077ed;
-}
-```
-
-### Palette 3: Warm Espresso Bronze (`data-palette="3"`)
-- Deep bronze `#211B1A` canvas, `#382A28` elevated cards, `#60433D` borders, `#C1A094` primary actions, and `#E8D8CE` text.
-
-### Palette 1: Slate Steel Blue (`data-palette="1"`)
-- Midnight slate `#111522` canvas, `#1E263B` cards, `#303D59` borders, `#98A9C4` accents, and `#DCE3EF` high-contrast text.
-
-### Palette 2: Obsidian Velvet (`data-palette="2"`)
-- Deep velvet `#17151C` canvas, `#292531` cards, `#45404F` insets, `#AAA2B3` actions, and `#E2DDE7` text.
+## 1. Design Philosophy & System Identity
+- **Product Truth**: High-fidelity educational clone of Amazon's e-commerce marketplace interface, retaining 100% of the original feature set, logo, categories, catalog, and search mechanics.
+- **UI Architecture & Color Grading**: Inspired by modern minimalist design specifications — neat, clean, uncluttered visual hierarchy, hairline structural borders, frosted glass sticky headers, and calibrated color grading across three distinctive architectural palettes.
+- **Craft Floor Rules**: Zero gradient text, high contrast (WCAG AA compliant ≥ 4.5:1), browser surface theming (custom scrollbars, text selection, focus rings), and tabular numerals (`tabular-nums`) for all prices and numeric metrics.
 
 ---
 
-## 3. Layout Hierarchy & Sections
+## 2. Multi-Palette Color Grading System
+The UI provides an interactive palette switcher on the secondary navigation bar (`.panel`), persisting user selection in `localStorage`:
 
-```
-┌────────────────────────────────────────────────────────┐
-│ Global Navigation (Frosted Glass, Links, Palette, Bag) │
-├────────────────────────────────────────────────────────┤
-│ Announcement Ribbon (EMI & Cashback Promotions)        │
-├────────────────────────────────────────────────────────┤
-│ Hero 1: iPhone Duo ("Hello, hello.")                   │
-├────────────────────────────────────────────────────────┤
-│ Hero 2: MacBook Pro ("PROLED XDR Display")             │
-├────────────────────────────────────────────────────────┤
-│ Hero 3: iPhone 18 Pro ("Pro further.")                 │
-├────────────────────────────────────────────────────────┤
-│ 2x3 Bento Showcase Grid                                │
-│ [Watch Series 12]  [iPad A16]                          │
-│ [AirPods Pro 3]    [MacBook Air M5]                    │
-│ [iPad mini]        [Apple Trade In]                    │
-├────────────────────────────────────────────────────────┤
-│ Entertainment Showcase (Apple TV+ Horizontal Carousel) │
-├────────────────────────────────────────────────────────┤
-│ Directory Footer (5 Columns + Disclaimers + Legal Bar) │
-└────────────────────────────────────────────────────────┘
-```
+### Palette 3 (Default): Warm Espresso Bronze Ramp (`#211B1A` → `#E8D8CE`)
+- `--amazon-body-bg: #211B1A;` — Deep espresso matte canvas
+- `--amazon-card-bg: #382A28;` — Warm bronze card surfaces
+- `--border-subtle: #60433D;` — Subtle structural borders
+- `--border-medium: #916B60;` — Medium focus borders
+- `--action-solid: #C1A094;` — Primary action CTA buttons
+- `--action-solid-text: #211B1A;` — Dark high-contrast button text (contrast > 7:1)
+- `--text-primary: #E8D8CE;` — High-contrast primary text (contrast > 13:1)
+- `--text-secondary: #C1A094;` — Secondary metadata labels
+
+### Palette 1: Slate Steel Blue Ramp (`#111522` → `#DCE3EF`)
+- `--amazon-body-bg: #111522;` — Midnight slate canvas
+- `--amazon-card-bg: #1E263B;` — Elevated slate cards
+- `--border-subtle: #303D59;` — Subtle divider borders
+- `--border-medium: #536684;` — Medium focus borders
+- `--action-solid: #98A9C4;` — Primary action CTA buttons
+- `--action-solid-text: #111522;` — High-contrast button text
+- `--text-primary: #DCE3EF;` — Primary high-contrast text
+
+### Palette 2: Obsidian Velvet Ramp (`#17151C` → `#E2DDE7`)
+- `--amazon-body-bg: #17151C;` — Deep velvet console canvas
+- `--amazon-card-bg: #292531;` — Elevated velvet cards
+- `--border-subtle: #45404F;` — Subtle divider borders
+- `--border-medium: #716879;` — Medium focus borders
+- `--action-solid: #AAA2B3;` — Primary action CTA buttons
+- `--action-solid-text: #17151C;` — High-contrast button text
+- `--text-primary: #E2DDE7;` — Primary high-contrast text
 
 ---
 
-## 4. Components & Micro-Interactions
-1. **Interactive Shopping Bag**:
-   - Slide-out drawer with backdrop blur.
-   - Dynamic real-time calculation of subtotal and 6-month No Cost EMI.
-   - Item quantity increment/decrement and removal with live badge updates.
-   - Persistent state in `localStorage`.
-2. **Apple TV+ Streaming Carousel**:
-   - Horizontal snap scrolling with prev/next buttons.
-   - Preview notifications for original titles (Pluribus, Severance, Monarch, etc.).
-3. **Pill Action Geometry**:
-   - Dual actions: Primary solid pill (`Buy`) and secondary ghost pill (`Learn more`).
-   - Smooth scale micro-transitions (`scale(1.02)` on hover).
+## 3. Typography & Spacing Hierarchy
+- **Primary Stack**: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
+- **Numerals**: `font-variant-numeric: tabular-nums` for all prices, ratings, and cart counters.
+- **Hierarchy & Breathing Room**:
+  - Headings: 1.28rem – 1.4rem (700 weight, line-height 1.3)
+  - Body: 14px – 16px (400 / 500 weight, line-height 1.5)
+  - Badges & Meta: 12px (600 / 700 weight, strictly above the 11px accessibility floor)
+  - Card Padding: Generous 20px 18px 16px padding on all product tiles.
+
+---
+
+## 4. Retained Native Features & Components
+1. **Header & Navigation**:
+   - Amazon Logo with prominent DEMO badge
+   - "Deliver to" location selector with modal dialog
+   - Debounced multi-category search with dropdown category selector
+   - Language selector dropdown with flag indicators
+   - Returns & Orders, and Accounts & Lists navigation
+   - Slide-out Cart Drawer with item increment/decrement and live calculation
+2. **Subnavigation & Side Drawer**:
+   - "All" hamburger menu opening 360px category side drawer
+   - Today's Deals, Customer Service, Registry, Gift Cards, Sell
+   - Interactive Theme Palette Switcher
+3. **Hero & Shop Grid**:
+   - Hero carousel with smooth controls
+   - 12+ CMS-driven product boxes with badges, star ratings, prices, and "Add to Cart" actions
+4. **Structured 4-Tier Footer**:
+   - Back to Top smooth scroll button
+   - 4-column directory (Get to Know Us, Make Money with Us, Amazon Payment Products, Let Us Help You)
+   - Brand logo & currency/language selectors
+   - Legal notice & educational disclaimer
